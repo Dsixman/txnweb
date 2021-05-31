@@ -9,12 +9,12 @@
       </div>
       <van-row type="flex" justify="space-between">
         <van-col span="10">
-          <van-button  type="default" class="w100" >
+          <van-button  type="default" @click="savejixiong($event)">
             有
           </van-button>
         </van-col>
         <van-col span="10">
-        <van-button  type="default">
+        <van-button  type="default" @click="savejixiong($event)">
           没有
         </van-button>
       </van-col>
@@ -31,11 +31,18 @@ export default {
     return{
       url:{
         prev:"/furu",
-        next:"/backfit"
+        next:"/backfit",
+        fatherobj:null
       },
     }
   },
+  methods:{
+    savejixiong(eve){
+      this.url.fatherobj=eve.target.innerText
+      this.$store.dispatch("commitjixiong",this.url.fatherobj)
+    }
 
+  },
   components:{
     Bottom,
   }
@@ -43,8 +50,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.van-col button{
+  font-size:1rem;
+    width:100%;
+    height:40px;
+    display:block;
+    margin:0 auto;
+    //padding:0 15px;
+    line-height:43px;
+    color:#000;
+}
+.van-col button:hover,.vancol button:focus{
+  color:red;
+  border:1px solid red;
+}
 .furu-title{
-  margin-top:30px;
+  //margin-top:30px;
+  margin:20px auto 0 auto;
+  height:140px;
+    line-height:120px;
 }
 .furu-img{
   margin-bottom:20px;

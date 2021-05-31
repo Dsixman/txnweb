@@ -1,228 +1,105 @@
 <template>
-  <div class="">
-    <div class="cm-top-description">
-      <div class="content">
-        你既往穿过的品牌
-      </div>
-      <div class="content-wrapper">
-        <div class="brand-form">
-          <van-field class="item-select"
-            readonly
-            clickable
-            :value="value"
-            placeholder="点击这里选择品牌"
-            @click="showPicker = true"
-          />
-          <van-popup v-model="showPicker" round position="bottom">
-            <van-picker
-              show-toolbar
-              :columns="columns"
-              @cancel="showPicker = false"
-              @confirm="onConfirm"
-            />
-          </van-popup>
-        </div>
-        <div class="size">
-          <div class="title">
-            您穿的尺码
-          </div>
-          <div class="nosize">
-            <div class="nosize-title" >
-              <van-col span="6">
-                <span>无尺码：</span>
-              </van-col>
-              <van-col span="18">
-                <van-field class="item-select"
-                  readonly
-                  clickable
-                  :value="value2"
-                  placeholder="点击选择无尺码的尺寸"
-                  @click="snsz= true"
-                />
-              </van-col>
-              <van-popup v-model="snsz" round position="bottom">
-                <van-picker
-                  show-toolbar
-                  :columns="nosizecolumns"
-                  @cancel="snsz = false"
-                  @confirm="clicksnsz"
-                />
-              </van-popup>
-            </div>
-
-          </div>
-          <div class="nosize">
-            <div class="nosize-title">
-              <van-col span="6">
-                <span>有尺码：</span>
-              </van-col>
-              <van-col span="18">
-                <van-field class="item-select"
-                  readonly
-                  clickable
-                  :value="value3"
-                  placeholder="点击选择有尺码的尺寸"
-                  @click="ysz= true"
-                />
-              </van-col>
-              <van-popup v-model="ysz" round position="bottom">
-                <van-picker
-                  show-toolbar
-                  :columns="normalsize"
-                  @cancel="ysz = false"
-                  @confirm="clickysz"
-                />
-              </van-popup>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  <Bottom :url="url"></Bottom>
-  </div>
+  <van-row class="bottom">
+    <van-col class="prev-page" v-if="this.url.prev">
+      <router-link :to="this.url.prev" >
+        <div class="prev-page-font-icon"><van-icon name="down" color="black" class="rtleft" size="1.8rem"></van-icon></div>
+        <div class="prev-page-word">上一页</div>
+      </router-link>
+    </van-col>
+    <van-col class="next-page" v-if="this.url.next">
+      <router-link :to="this.url.next">
+        <span><van-icon name="arrow-down" color="white"></van-icon></span>
+        <span>下一页</span>
+      </router-link>
+    </van-col>
+  </van-row>
 </template>
 
 <script>
-import Bottom from '@/components/Bottom.vue'
-import { Toast } from 'vant';
 export default {
+  name:"bottom",
   data(){
-    return {
-      url:{
-        prev:"/",
-        next:"/chestmeasure",
-      },
-      value:'',
-      value2:'',
-      value3:"",
-      showPicker: false,
-      snsz:false,
-      ysz:false,
-      columns: ['Ubras', '内外', '焦内', '曼尼芬', '遐 HISA', "Victoria's Secret", '都市丽人'],
-      nosizecolumns: ["均码","S","M","L","XL"],
-      normalsize:['65A', '70A', '75A', '80A','85A','90A','65B', '70B', '75B', '80B','85B','90B','65C', '70C', '75C', '80C','85C','90C','65D', '70D', '75D', '80D','85D','90D','65E', '70E', '75E', '80E','85E','90E']
+    return{
+
     }
   },
-  components:{
-    Bottom
-  },
-  mounted:function(){
+  props:["url"],
+  computed:{
 
   },
-  methods: {
-   onCancel() {
-     Toast('取消');
-   },
-   onConfirm(value) {
-   this.value = value;
-   this.showPicker = false;
-  },
-  cancelsnsz() {
-    Toast('取消');
-  },
-  clicksnsz(value) {
-  this.value2 = value;
-  this.snsz = false;
-},
-  cancelysz() {
-    Toast('取消');
-  },
-  clickysz(value) {
-  this.value3 = value;
-  this.ysz = false;
-  },
-  changeStyle(ele){
-    if (ele.target.className.indexOf("active")===-1){
-      let partent=ele.target.parentNode
-      console.log(partent)
-      let brotherele=partent.getElementsByClassName('van-button')
-      for(let i=0;i<=brotherele.length-1;i++){
-        if (brotherele[i].className.indexOf(" active")>-1){
-          brotherele[i].className=brotherele[i].className.replace(' active',"")
-          break;
-        }
-      }
-      ele.target.className=ele.target.className+" active";
-    }
+  mounted(){
+    console.log(this.url)
+    //console.log(this.url)
   }
- },
+
 }
 </script>
 
 <style lang="scss" scoped>
-.clear{
-  clear: both;
+.bottom{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom: 15px;
+  margin: auto;
+  height:60px;
+  //margin-top:20px;
+//  overflow:hidden;
+  width:80%;
+  ///margin: 90% auto 0 auto;
+  //border:1px solid #ff0000;
+
 }
-.w20{
-  width:30%;
+.rtleft{
+  transform:rotate(90deg);
+  //padding-top:15px;
+  //line-height:90px;
+}
+.prev-page{
+
+  width:45%;
+  border: 1px solid #ebedf0;
+  border-radius:2px ;
   float:left;
-  line-height:3rem
-}
-.cm-top-title{
-  font-size:1.4rem;
-  margin:50px auto 0 auto;
-  width:100%;
-  text-align:center;
-}
-.cm-top-description{
-  font-size:1rem;
-  width:100%;
-  text-align: center;
-  margin-top:30px;
-  .content{
-    line-height:2rem;
-    width:80%;
-    margin:0 auto;
+
+  height:40px;
+  div{
+    float:left
+  }
+  .prev-page-font-icon{
+    width:39%;
+    padding-top:5px;
+  }
+  .prev-page-word{
+    width:39%;
+
   }
 }
-.content-wrapper{
-  width:80%;
-  margin:0 auto;
+a:link,a:visited {
+  box-sizing: content-box;
+    width:90%;
+    height:40px;
+    display:block;
+    margin:0 auto;
+    //border: 1px solid #ebedf0;
+    border-radius: 2px;
+    padding:0 15px;
+    line-height:43px;
+    color:#000;
+
 }
-.active{
+a:hover,a:active{
+  color:red;
   border:1px solid #ff0000;
 }
-.size{
-  overflow:hidden;
-  .title{
-    margin-top:25px;
-  }
-  .nosize{
-    margin-top:20px;
-    width:100%;
-    .nosize-title{
-      line-height:2.5rem;
-      overflow:hidden;
-      width:90%;
-      margin:0 auto;
-      cursor:pointer;
-      text-align:center;
-}
-    .nosize-title:hover{
-      color:red;
-      border-bottom:1px solid #ff0000;
-    }
-  }
-  .van-button{
-    display: block;
-    float:left;
-    margin-left:10px
-  }
+.next-page{
 
+  width:45%;
+  border:1px solid #FFF;
+  border-radius:2px ;
+  float:left;
+  height:40px;
 }
 
-.brand-form{
-  margin-top:20px;
-  .item-select{
-      width:60%;
-      margin:0 auto;
-      input{
-        text-align:center;
-      }
-  }
-  }
-.clear{
-  clear:both;
-}
 
 </style>

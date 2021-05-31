@@ -18,7 +18,7 @@
           </div>
           <div class="step-form">
             <van-col span="18">
-               <van-field v-model="value" placeholder="请输入您测量到的数据" />
+               <van-field v-model="stand" placeholder="请输入您测量到的数据" input-align="center"/>
             </van-col>
             <van-col span="6" class="step-right-cm">
               cm
@@ -36,7 +36,7 @@
             </div>
             <div class="step-form">
               <van-col span="18">
-                 <van-field v-model="value" placeholder="请输入您测量到的数据" />
+                 <van-field v-model="xieyao" placeholder="请输入您测量到的数据" input-align="center"/>
               </van-col>
               <van-col span="6" class="step-right-cm">
                 cm
@@ -54,7 +54,7 @@
               </div>
               <div class="step-form">
                 <van-col span="18">
-                   <van-field v-model="value" placeholder="请输入您测量到的数据" />
+                   <van-field v-model="zhijiao" placeholder="请输入您测量到的数据" input-align="center"/>
                 </van-col>
                 <van-col span="6" class="step-right-cm">
                   cm
@@ -73,12 +73,23 @@ export default {
     return {
       url:{
         prev:"/chestmeasure",
-        next:"/chestshapes"
-      }
+        next:"/chestshapes",
+        fatherobj:null
+      },
+      stand:"",
+      zhijiao:'',
+      xieyao:""
     }
   },
   components:{
     Bottom
+  },
+  updated(){
+    if(this.stand!=""&&this.zhijiao!=""&&this.xieyao!=""){
+      let data={stand:this.stand,zhijiao:this.zhijiao,xieyao:this.xieyao}
+      this.$store.dispatch('commitupchestmeasure',data)
+      this.url.fatherobj=data
+    }
   }
 }
 </script>
@@ -86,7 +97,9 @@ export default {
 <style lang="scss" scoped>
 .cm-top-title{
   font-size:1.2rem;
-  margin:30px auto 0 auto;
+  margin:20px auto 0 auto;
+  height:140px;
+    line-height:120px;
   width:100%;
   text-align:center;
 }

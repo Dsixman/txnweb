@@ -6,9 +6,9 @@
     <div class="cup-content">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="@/assets/wk.jpg" /><span>比较紧</span></div>
-            <div class="swiper-slide"><img src="@/assets/wk.jpg" /><span>刚刚好</span></div>
-            <div class="swiper-slide"><img src="@/assets/wk.jpg" /><span>比较松</span></div>
+            <div class="swiper-slide" @click="savebackfit($event)"><span>比较紧</span></div>
+            <div class="swiper-slide" @click="savebackfit($event)"><span>刚刚好</span></div>
+            <div class="swiper-slide" @click="savebackfit($event)"><span>比较松</span></div>
         </div>
       </div>
     </div>
@@ -27,33 +27,40 @@ export default {
     return {
       url:{
         prev:"/jixiong",
-        next:"/ChestMeasure"
+        next:"/chestmeasure",
+        fatherobj:null
       }
     }
   },
   computed:{
 
   },
+  methods:{
+    savebackfit(eve){
+      this.url.fatherobj=eve.target.innerText
+
+      this.$store.dispatch("commitbackfit",this.url.fatherobj)
+    }
+  },
   components:{
     Bottom
   },
   mounted(){
     new Swiper('.swiper-container', {
-       slidesPerView: 1,
+       slidesPerView: 2,
        spaceBetween: 30,
        centeredSlides: true,
        loop: false,
      });
-  },
-  methods:{
-
   },
 }
 </script>
 
 <style lang="scss" scoped>
 .back-title{
-  margin-top:30px;
+  margin:20px auto 0 auto;
+  height:140px;
+    line-height:120px;
 }
 .swiper-container {
   margin-top:30px;

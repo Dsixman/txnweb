@@ -6,14 +6,16 @@
     <div class="cup-content">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><span>压胸</span></div>
-            <div class="swiper-slide"><span>刚刚好</span></div>
-            <div class="swiper-slide"><span>很松</span></div>
+            <div class="swiper-slide" @click="savecupfit($event)"><span>压胸</span></div>
+            <div class="swiper-slide" @click="savecupfit($event)"><span>稍微压胸</span></div>
+            <div class="swiper-slide" @click="savecupfit($event)"><span>刚刚好</span></div>
+            <div class="swiper-slide" @click="savecupfit($event)"><span>有些空杯</span></div>
+            <div class="swiper-slide" @click="savecupfit($event)"><span>空杯</span></div>
         </div>
       </div>
     </div>
 
-    <Bottom :url="url2"></Bottom>
+    <Bottom :url="url"></Bottom>
   </div>
 </template>
 
@@ -28,8 +30,8 @@ export default {
     }
   },
   computed:{
-    url2:function(){
-      let url2={}
+    url:function(){
+      let url2={prev:"",next:"",fatherobj:null}
       url2.prev="/fitbar"
       url2.next="/furu"
       //url2.whichtype=url.whichtype
@@ -41,21 +43,29 @@ export default {
   },
   mounted(){
     new Swiper('.swiper-container', {
-       slidesPerView: 1,
+       slidesPerView: 2,
        spaceBetween: 30,
        centeredSlides: true,
        loop: false,
      });
   },
   methods:{
-
+    savecupfit(eve){
+      this.url.fatherobj=eve.target.innerText
+      console.log(eve.target.innerText)
+      this.$store.dispatch("commitcupfit",eve.target.innerText)
+      console.log("cupfit ")
+      console.log(this.$store.state.cupfit)
+    }
   },
 }
 </script>
 
 <style lang="scss" scoped>
 .cup-title{
-  margin-top:30px
+  margin:20px auto 0 auto;
+  height:140px;
+    line-height:120px;
 }
 .swiper-container {
 

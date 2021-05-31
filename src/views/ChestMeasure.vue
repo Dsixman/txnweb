@@ -19,7 +19,7 @@
           </div>
           <div class="step-form">
             <van-col span="18">
-               <van-field v-model="value" placeholder="请输入您测量到的数据" />
+               <van-field v-model="xiqi" placeholder="请输入您测量到的数据"  input-align="center"/>
             </van-col>
             <van-col span="6" class="step-right-cm">
               cm
@@ -37,7 +37,7 @@
             </div>
             <div class="step-form">
               <van-col span="18">
-                 <van-field v-model="value" placeholder="请输入您测量到的数据" />
+                 <van-field v-model="tuqi" placeholder="请输入您测量到的数据" input-align="center" />
               </van-col>
               <van-col span="6" class="step-right-cm">
                 cm
@@ -57,14 +57,38 @@ export default {
     return {
       url:{
         prev:"/backfit",
-        next:"/upchestmeasure"
-      }
+        next:"/upchestmeasure",
+        fatherobj:null
+      },
+      tuqi:this.$store.state.chestmeasure.tuqi,
+      xiqi:this.$store.state.chestmeasure.xiqi
     }
   },
   components:{
     Bottom
   },
-  mounted:function(){
+  methods:{
+    // savechestdata(){
+    //   if(this.xiqi!=""&&this.tuqi!=""){
+    //     let data={xiqi:this.xiqi,tuqi:this.tuqi}
+    //     this.$store.dispatch('commitchestmeasure',data)
+    //     this.url.fatherobj=data
+    //     console.log("chest ")
+    //     console.log(this.url.fatherobj)
+    //   }
+    // }
+  },
+  mounted(){
+
+  },
+  updated(){
+    if(this.xiqi!=""&&this.tuqi!=""){
+      let data={xiqi:this.xiqi,tuqi:this.tuqi}
+      this.$store.dispatch('commitchestmeasure',data)
+      this.url.fatherobj=data
+      console.log("chest ")
+      console.log(this.url.fatherobj)
+    }
 
   }
 }
@@ -73,7 +97,9 @@ export default {
 <style lang="scss" scoped>
 .cm-top-title{
   font-size:1.2rem;
-  margin:30px auto 0 auto;
+  margin:20px auto 0 auto;
+  height:140px;
+    line-height:120px;
   width:100%;
   text-align:center;
 }
@@ -88,7 +114,9 @@ export default {
     margin:0 auto;
   }
 }
-
+.van-field__control{
+  text-align:center;
+}
 .step{
   width:80%;
   font-size:0.9rem;

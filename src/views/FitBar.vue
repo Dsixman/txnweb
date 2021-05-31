@@ -6,11 +6,11 @@
     <div class="cup-content">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><span>很紧</span></div>
-            <div class="swiper-slide"><span>稍微有些紧</span></div>
-            <div class="swiper-slide"><span>刚刚好</span></div>
-            <div class="swiper-slide"><span>稍微有些松</span></div>
-            <div class="swiper-slide"><span>很松</span></div>
+            <div class="swiper-slide" @click="savefitbar($event)"><span>很紧</span></div>
+            <div class="swiper-slide" @click="savefitbar($event)"><span>稍微有些紧</span></div>
+            <div class="swiper-slide" @click="savefitbar($event)"><span>刚刚好</span></div>
+            <div class="swiper-slide" @click="savefitbar($event)"><span>稍微有些松</span></div>
+            <div class="swiper-slide" @click="savefitbar($event)"><span>很松</span></div>
         </div>
       </div>
     </div>
@@ -32,14 +32,15 @@ export default {
   computed:{
     url:function(){
       let prev=this.$store.state.prevurl
-      let url={}
+      let url={prev:"",next:"",fatherobj:null}
       if (prev=="nosize"){
         url.prev='/nosize'
       }else{
-        url.prev='hadsize'
+        url.prev='/hadsize'
       }
       url.next='/cupfit'
       return url
+
     }
   },
   components:{
@@ -47,21 +48,29 @@ export default {
   },
   mounted(){
     new Swiper('.swiper-container', {
-       slidesPerView: 1,
+       slidesPerView: 2,
        spaceBetween: 30,
        centeredSlides: true,
        loop: false,
      });
   },
   methods:{
+    savefitbar(eve){
+      this.url.fatherobj=eve.target.innerText
 
+      this.$store.dispatch("commitfitbar",this.url.fatherobj)
+
+      //console.log(this.url)
+    }
   },
 }
 </script>
 
 <style lang="scss" scoped>
 .cup-title{
-  margin-top:30px
+  margin:20px auto 0 auto;
+  height:140px;
+    line-height:120px;
 }
 .swiper-container {
   margin-top:30px;

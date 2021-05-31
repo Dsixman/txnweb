@@ -5,11 +5,11 @@
   </div>
   <div class="swiper-container">
     <div class="swiper-wrapper">
-        <div class="swiper-slide"><span>圆盘型</span></div>
-        <div class="swiper-slide"><span>圆锥型</span></div>
-        <div class="swiper-slide"><span>纺锤型</span></div>
-        <div class="swiper-slide"><span>下垂型</span></div>
-        <div class="swiper-slide"><span>半球型</span></div>
+        <div class="swiper-slide" @click="saveshapes($event)"><span>圆盘型</span></div>
+        <div class="swiper-slide" @click="saveshapes($event)"><span>圆锥型</span></div>
+        <div class="swiper-slide" @click="saveshapes($event)"><span>纺锤型</span></div>
+        <div class="swiper-slide" @click="saveshapes($event)"><span>下垂型</span></div>
+        <div class="swiper-slide" @click="saveshapes($event)"><span>半球型</span></div>
     </div>
   </div>
   <div class="wk">
@@ -20,12 +20,12 @@
     <div class="wk-title">
       <van-row type="flex" justify="space-between" >
         <van-col span="10">
-          <van-button type="default">
+          <van-button type="default" @click="savewk($event)">
             是
           </van-button>
         </van-col>
         <van-col span="10">
-          <van-button type="default">
+          <van-button type="default" @click="savewk($event)">
             否
           </van-button>
         </van-col>
@@ -45,16 +45,41 @@ export default {
     return{
       url:{
         prev:"/upchestmeasure",
-        next:"/result"
-      }
+        next:"/result",
+        fatherobj:null
+      },
+      shape:"",
+      wk:""
     }
   },
   components:{
     Bottom
   },
+  methods:{
+    saveshapes(eve){
+      let shape=eve.target.innerText;
+    console.log(shape)
+      this.shape=shape
+      if (this.wk!=""){
+        let data={shape:shape,wk:this.wk}
+        this.$store.dispatch("commitchestshapes",data)
+        this.url.fatherobj=data
+      }
+
+    },
+    savewk(eve){
+      let wk=eve.target.innerText;
+      this.wk=wk
+      if (this.shape!=""){
+        let data={shape:this.shape,wk:wk}
+        this.$store.dispatch("commitchestshapes",data)
+        this.url.fatherobj=data
+      }
+    }
+  },
   mounted(){
    new Swiper('.swiper-container', {
-      slidesPerView: 1,
+      slidesPerView: 2,
       spaceBetween: 30,
       centeredSlides: true,
       loop: false,
@@ -78,9 +103,14 @@ export default {
         }
       }
 }
+.van-button:focus{
+  border:1px solid #ff0000;
+}
 .shapes-title{
   font-size:1.2rem;
-  margin:30px auto 0 auto;
+  margin:20px auto 0 auto;
+  height:140px;
+    line-height:120px;
   width:100%;
   text-align:center;
 }
@@ -139,9 +169,13 @@ export default {
       }
 
     }
+
 	.swiper-slide-active,.swiper-slide-duplicate-active{
     transform: scale(1);
 	}
+  .swiper-slide:hover{
+    border:1px solid #ff0000;
+  }
 
 }
 </style>

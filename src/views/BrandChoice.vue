@@ -1,69 +1,84 @@
 <template>
   <div class="">
-    <div class="cm-top-description">
+    <div class="cm-top-description" >
       <div class="content">
         您既往穿过的品牌
       </div>
       <div class="content-wrapper">
         <div class="brand-title">
-          <van-col span="12" class="brand-title-items" >
-            <router-link class="w90pec" to="/hadsize" >古今</router-link>
+          <van-col span="24" class="brand-title-items" >
+            <router-link class="w90pec" to="/hadsize" @click="savebrand($event)">古今</router-link>
           </van-col>
-          <van-col span="12" class="brand-title-items">
-            <router-link class="w90pec" to="/nosize">Ubras
-            </router-link>
+        </div>
+        <div class="brand-title">
+          <van-col span="24" class="brand-title-items">
+            <router-link class="w90pec" to="/nosize"  @click="savebrand($event)">Ubras</router-link>
           </van-col>
         </div>
         <div class="brand-title" >
-          <van-col span="12" class="brand-title-items">
-            <router-link class="w90pec" to="/nosize">内外</router-link>
+          <van-col span="24" class="brand-title-items">
+            <router-link class="w90pec" to="/nosize"  @click="savebrand($event)">内外</router-link>
           </van-col>
-          <van-col span="12" class="brand-title-items">
-            <router-link class="w90pec" to="/hadsize" >蕉内
+
+        </div>
+        <div class="brand-title">
+          <van-col span="24" class="brand-title-items">
+            <router-link class="w90pec" to="/hadsize"  @click="savebrand($event)">蕉内
             </router-link>
           </van-col>
         </div>
+
+
         <div class="brand-title" >
-          <van-col span="12" class="brand-title-items">
-            <router-link class="w90pec" to="/hadsize" >曼尼芬</router-link>
+          <van-col span="24" class="brand-title-items">
+            <router-link class="w90pec" to="/hadsize" @click="savebrand($event)" >曼尼芬</router-link>
           </van-col>
-          <van-col span="12" class="brand-title-items">
-            <router-link class="w90pec" to="/hadsize" >遐 HISA
+        </div>
+        <div class="brand-title">
+          <van-col span="24" class="brand-title-items">
+            <router-link class="w90pec" to="/hadsize"  @click="savebrand($event)">遐 HISA
             </router-link>
           </van-col>
         </div>
         <div class="brand-title">
-          <van-col span="12" class="brand-title-items">
-            <router-link class="w90pec" to="/hadsize">都市丽人</router-link>
+          <van-col span="24" class="brand-title-items">
+            <router-link class="w90pec" to="/hadsize"  @click="savebrand($event)">都市丽人</router-link>
           </van-col>
-          <van-col span="12" class="brand-title-items">
-            <router-link class="w90pec" to="/hadsize" >爱慕Aimer
+
+        </div>
+        <div class="brand-title">
+          <van-col span="24" class="brand-title-items">
+            <router-link class="w90pec" to="/hadsize"  @click="savebrand($event)">爱慕Aimer
             </router-link>
           </van-col>
         </div>
         <div class="brand-title">
-          <van-col span="12" class="brand-title-items">
-            <router-link class="w90pec"  to="/hadsize">黛安芬</router-link>
+          <van-col span="24" class="brand-title-items">
+            <router-link class="w90pec"  to="/hadsize"  @click="savebrand($event)">黛安芬</router-link>
           </van-col>
-          <van-col span="12" class="brand-title-items">
-            <router-link class="w90pec" to="/hadsize">婷美
-            </router-link >
+
+        </div>
+        <div class="brand-title">
+          <van-col span="24" class="brand-title-items">
+            <router-link class="w90pec" to="/hadsize"  @click="savebrand($event)">婷美 </router-link >
           </van-col>
         </div>
       </div>
+
+
     </div>
-  <Bottom :url="url"></Bottom>
+
   </div>
 </template>
 
 <script>
-import Bottom from '@/components/Bottom.vue'
+//import Bottom from '@/components/Bottom.vue'
 import { Toast } from 'vant';
 export default {
   data(){
     return {
       url:{
-        prev:"/",
+        prev:"",
         next:"",
       },
       value:'',
@@ -72,18 +87,25 @@ export default {
       showPicker: false,
       snsz:false,
       ysz:false,
-      columns: ['Ubras', '内外', '焦内', '曼尼芬', '遐 HISA', "Victoria's Secret", '都市丽人'],
-      nosizecolumns: ["均码","S","M","L","XL"],
-      normalsize:['65A', '70A', '75A', '80A','85A','90A','65B', '70B', '75B', '80B','85B','90B','65C', '70C', '75C', '80C','85C','90C','65D', '70D', '75D', '80D','85D','90D','65E', '70E', '75E', '80E','85E','90E']
+
     }
   },
   components:{
-    Bottom
+  //  Bottom
   },
   mounted:function(){
 
   },
   methods: {
+   savebrand(eve){
+     let txt=eve.target.text
+        this.$store.dispatch("commitbrand",txt)
+        if(txt=="内外"||txt=="Ubras"){
+          this.$router.push("/nosize")
+        }else{
+          this.$router.push("/hadsize")
+        }
+    },
    onCancel() {
      Toast('取消');
    },
@@ -126,16 +148,18 @@ export default {
 <style lang="scss" scoped>
 
 .brand-title{
-  margin-top:20px;
+  margin-top:15px;
   overflow:hidden;
-  height:12vh;
+  height:45px;
 
   .brand-title-items{
     height:40px;
   //  border:1px solid #ff0000;
     text-align: center;
+      box-sizing: content-box;
     a:link,a:visited {
-        width:70%;
+      box-sizing: content-box;
+        width:89%;
         height:40px;
         display:block;
         margin:0 auto;
@@ -169,11 +193,14 @@ export default {
   width:100%;
   text-align: center;
   margin-top:30px;
+  padding-bottom:30px;
   .content{
     //line-height:2rem;
+    line-height:120px;
     font-size:1.2rem;
     width:80%;
-    margin:30px auto 0 auto;
+    margin:20px auto 0 auto;
+    height:140px;
   }
 }
 .content-wrapper{
@@ -181,34 +208,6 @@ export default {
   margin:0 auto;
 }
 
-.size{
-  overflow:hidden;
-  .title{
-    margin-top:25px;
-  }
-  .nosize{
-    margin-top:20px;
-    width:100%;
-    .nosize-title{
-      line-height:2.5rem;
-      overflow:hidden;
-      width:90%;
-      margin:0 auto;
-      cursor:pointer;
-      text-align:center;
-}
-    .nosize-title:hover{
-      color:red;
-      border-bottom:1px solid #ff0000;
-    }
-  }
-  .van-button{
-    display: block;
-    float:left;
-    margin-left:10px
-  }
-
-}
 
 .brand-form{
   margin-top:20px;

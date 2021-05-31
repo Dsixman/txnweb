@@ -9,15 +9,17 @@
       </div>
       <van-row type="flex" justify="space-between">
         <van-col span="10">
-
-          <router-link :to="{ name: '', params: {} }">
+          <!-- <a href="javascript:void(0)" @click="savefuru($event)">
             有
-          </router-link>
+          </a> -->
+          <van-button  @click="savefuru($event)">
+            有
+          </van-button>
         </van-col>
         <van-col span="10">
-          <router-link :to="{ name: '', params: {} }" >
+          <van-button @click="savefuru($event)" >
             没有
-          </router-link>
+          </van-button>
       </van-col>
       </van-row>
     </div>
@@ -32,36 +34,45 @@ export default {
     return{
       url:{
         prev:"/cupfit",
-        next:"/jixiong"
+        next:"/jixiong",
+        fatherobj:null
       }
     }
   },
   components:{
     Bottom,
+  },
+  methods:{
+    savefuru(eve){
+      //console.log(eve.target)
+      this.url.fatherobj=eve.target.innerText
+
+      this.$store.dispatch("commitfuru",this.url.fatherobj)
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-a:link,a:visited {
+
+.van-col button{
   font-size:1rem;
     width:100%;
     height:40px;
     display:block;
     margin:0 auto;
-    border: 1px solid #ebedf0;
-    border-radius: 2px;
     //padding:0 15px;
     line-height:43px;
     color:#000;
-
 }
-a:hover,a:active{
+.van-col button:hover,.vancol button:focus{
   color:red;
   border:1px solid red;
 }
 .furu-title{
-  margin-top:30px;
+  margin:20px auto 0 auto;
+  height:140px;
+  line-height:120px
 }
 .furu-img{
   margin-bottom:20px;
