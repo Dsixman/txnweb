@@ -1,44 +1,73 @@
 <template>
-  <div id="app">
-    <van-col span="24" class="mt5">
-      甜小内文胸尺码助手
-    </van-col>
-    <div class="test">
-      <van-col span="24" class="app-test-img">
-        <img src="@/assets/1.jpg" alt="">
-      </van-col>
-      <van-col  span="16" offset="4">
-        <router-link to="/" span="24" class="app-test-home-a">推荐自测</router-link>
-      </van-col>
-
-    </div>
-    <div class="test">
-      <div class="app-test-img">
-        <van-col span="24" class="app-test-img">
-            <img src="@/assets/2.jpg" alt="">
-        </van-col>
-      </div>
-      <van-col span="16" offset="4">
-        <router-link to="/" span="24" class="app-test-home-a">智能测量</router-link>
-      </van-col>
-    </div>
-    <router-view/>
+  <div id="app" >
+    <router-view />
   </div>
 </template>
+<script>
+  //import Vue from 'vue'
+  export default{
 
+    data(){
+      return {
+        code:null,
+      }
+    },
+    components:{
+
+    },
+    computed:{
+
+    },
+    beforeCreated(){
+
+    },
+    methods:{
+
+    },
+    created(){
+      document.querySelector("meta[name='viewport']")["content"] = "width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"
+
+    },
+    mounted(){
+      document.getElementsByTagName("body")[0].className="bodybg"
+    },
+    updated(){
+      //this.nickname3=this.$store.state.nickname
+
+    }
+  }
+</script>
 <style lang="scss">
-@media only screen and (max-width:480px) {
- .mt5{
-   margin-top:10px
- }
-  #app {
-    font-size:1.4rem;
-    width:100%;
+.bodybg{background:#fff0f0;overflow-y:auto;}
+@media only screen and (min-width:480px){
+  #app{
+    //background:#fff5f5;
+    width:480px;
+    margin:0 auto;
+    font-size:0.8rem;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    position: relative;
+  //  box-sizing: content-box;
+
+  }
+}
+@media only screen and (max-width:480px) {
+
+  #app {
+    //background:#fff5f5;
+    width:100%;
+    font-size:0.8rem;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    position: relative;
+    color: #2c3e50;
+
   }
 
   #nav {
@@ -52,16 +81,6 @@
       }
     }
   }
-  .test{
 
-    .app-test-home-a{
-      color:white;
-      font-size: 1.4rem;
-      background:#dabcba;
-      display: block;
-      line-height: 3.5rem;
-    }
-    .app-test-img{}
-  }
 }
 </style>
