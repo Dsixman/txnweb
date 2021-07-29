@@ -21,16 +21,12 @@
     </div>
     <div class="personal-detail">
       <div class="">
-
         <div class="personal-profile">
           <router-link :to="{ name: 'BaseData', params: {} }"><van-icon name="user-o" size="25px" /> <span class="van-icon">个人基础资料</span></router-link>
         </div>
         <div class="personal-profile">
           <router-link :to="{ name: 'BodyData', params: {} }"><van-icon name="records" size="25px"/> <span class="van-icon" >身体数据</span></router-link>
         </div>
-      </div>
-      <div class="" style="height:50px;">
-
       </div>
     </div>
   </div>
@@ -41,8 +37,6 @@ import Vue from 'vue'
 export default {
   data(){
     return{
-      // user_name:null,
-      // user_txncup:null,
     }
   },
   computed:{
@@ -67,19 +61,16 @@ export default {
          headers: {
            'x-token':token
          }}).then(data=>{
-          // console.log(data)
            if (data.err){
              this.$store.dispatch('commitgeterr',data.data)
              this.$router.push('/err')
            }else{
-             //console.log(data.data[0])
              this.$store.dispatch("commitpersonaldata",data.data[0])
              this.$store.dispatch("commitnickname",data.data[0].wx_user_name)
              this.$store.dispatch("committxncup",data.data[0].user_txncup)
              this.$store.dispatch("commitusericon",data.data[0].user_icon)
            }
       }).catch(err=>{
-        //console.log(err)
         this.$store.dispatch('commitgeterr',err)
         this.$router.push('/err')
       })
@@ -113,30 +104,25 @@ a:hover,a:active{
 .personal{
   box-sizing: border-box;
   position:relative;
-  padding-top:50px;
-    //height:100vh;
-  //  background:url("../assets/psbg.jpg") no-repeat;
-
-}
-.personal-detail{
-  height:40vh;
-  padding-top:70px;
-//  border:1px solid grey;
-  border-radius: 40px 40px 0 0;
-  //height:500px;
-background:#fff0f0;
-.personal-profile{
-  width:70%;
-  border-bottom:1px solid grey;
-  margin:0 auto 20px auto;
-  text-align: left;
-  span{
-    padding:0px;
-    vertical-align:top;
+  padding-top:100px;
+  .personal-detail{
+    height:46vh;
+    padding-top:70px;
+    border-radius: 40px 40px 0 0;
+  background:#fff0f0;
+    .personal-profile{
+      width:70%;
+      border-bottom:1px solid grey;
+      margin:0 auto 20px auto;
+      text-align: left;
+      span{
+        padding:0px;
+        vertical-align:top;
+      }
+    }
   }
 }
 
-}
 .personal-top{
 overflow:hidden
 }
@@ -147,9 +133,7 @@ overflow:hidden
       border:1px solid white;
       border-radius: 50%;
       margin:0 auto;
-      //
   }
-
 }
 .personal-base{
   padding-top:30px;

@@ -25,7 +25,6 @@ export default {
   background-size:cover;
   box-sizing: border-box;
     position: relative;
-    padding-top: 50px;
     height: 100vh;
 }
 
