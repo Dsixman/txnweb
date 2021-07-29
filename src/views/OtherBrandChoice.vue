@@ -1,15 +1,10 @@
 <template>
 
     <div class="cm-top-description" >
-
-        <div class="title-wrapper" >
-          <div class="size-title">
-            宝，您经常穿什么品牌呢?
-            <div class="" style="font-size:0.7rem">
-              (文胸品牌千千万,甜小内是我最爱)
-            </div>
-          </div>
-
+      <div class="title-wrapper">
+        <div class="size-title">
+          宝，您经常穿什么品牌呢?
+        </div>
       </div>
 
       <div class="content-wrapper">
@@ -136,27 +131,14 @@ created(){
 
   },
   methods: {
-  // trim (str) {
-  //     return str.replace(/(^[\s\n\t]+|[\s\n\t]+$)/g, "")
-  // }
    savebrand(eve){
-     let txt=eve.target.innerText//苹果设备的浏览器获取的文字会添加空格
-        txt=txt.replace(/(^[\s\n\t]+|[\s\n\t]+$)/g, "")
+     let txt=eve.target.innerText
         this.$store.dispatch("commitbrand",txt)
-
-        if((txt=="内外")||(txt=="Ubras")||(txt=="蕉内")){
-
+        if(txt=="内外"||txt=="Ubras"){
           this.$router.push("/nosize")
-        }
-        if(txt=="甜小内"){
-
-          this.$router.push("/txnsize")
-        }
-        if ((txt!=="甜小内")&&(txt!=="内外")&&(txt!=="Ubras")&&(txt!=="蕉内")){
-
+        }else{
           this.$router.push("/hadsize")
         }
-
     },
    onCancel() {
      Toast('取消');
@@ -198,9 +180,7 @@ created(){
 
 <style lang="scss" scoped>
 .title-wrapper{
-  width:80%;
-  margin:0px auto 15px auto;
-
+  width:80%;margin:0px auto 10px auto;
 //
 //  box-sizing: border-box;
 }
@@ -218,12 +198,10 @@ created(){
   .brand-title-items{
     height:40px;
     text-align: center;
-    //margin:0 auto;
   //  box-sizing: content-box;
       button{
         background:white;
         box-sizing: border-box;
-        font-size:0.8rem;
         width:95%;
           height:35px;
           display:block;
@@ -265,14 +243,13 @@ created(){
     font-size:1rem;
     font-weight: bold;
     width:100%;
-    margin:0px auto 0px auto;
-    height:70px;
+    margin:20px auto 20px auto;
+    height:50px;
   }
 }
 .content-wrapper{
-  width:70%;
+  width:80%;
   margin:0 auto;
-  font-size:0.8rem
 }
 
 

@@ -4,6 +4,8 @@
       <div class="size-title">
         穿的是他们家的什么码数？
       </div>
+      <div class="clear">
+      </div>
     </div>
 
       <div class="size-content">
@@ -12,7 +14,11 @@
           <van-col class="cup-title" span="11" id="cup-title"  v-bind:class="{ active: cupActive, noactive:bandActive}"  @click="changeCupActive">{{cup}}</van-col>
         </van-row>
         <van-row  class="band-content" type="flex" justify="space-between" v-show="bandShow">
-
+          <div class="band-items">
+            <van-col span="24" class="">
+              <van-button  type="default" @click="tocup(60)">60</van-button>
+            </van-col>
+          </div>
           <div class="band-items">
             <van-col span="24" >
               <van-button  type="default" @click="tocup(65)">65</van-button>
@@ -44,47 +50,65 @@
               <van-button type="default" @click="tocup(90)">90</van-button>
             </van-col>
           </div>
-          <div class="band-items">
-            <van-col span="24" class="">
-              <van-button  type="default" @click="tocup(95)">95</van-button>
-            </van-col>
-          </div>
 
         </van-row>
         <van-row v-show="cupShow" class="cup-content" type="flex" justify="space-between" >
+          <van-col span="24" class="band-items">
+            <van-button type="default" @click="isToNext('AA1')">AA1</van-button>
+          </van-col>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="isToNext('AA')">AA</van-button>
+              <van-button type="default" @click="isToNext('AA2')">AA2</van-button>
             </van-col>
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="isToNext('A')">A</van-button>
+              <van-button type="default" @click="isToNext('A1')">A1</van-button>
             </van-col>
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="isToNext('B')">B</van-button>
+              <van-button type="default" @click="isToNext('A2')">A2</van-button>
+            </van-col>
+          </div>
+          <div class="band-items">
+            <van-col span="24">
+              <van-button type="default" @click="isToNext('B1')">B1</van-button>
             </van-col >
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="isToNext('C')">C</van-button>
+              <van-button type="default" @click="isToNext('B2')">B2</van-button>
+            </van-col>
+          </div>
+          <div class="band-items">
+            <van-col span="24">
+              <van-button type="default" @click="isToNext('C1')">C1</van-button>
             </van-col >
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="isToNext('D')">D</van-button>
+              <van-button type="default" @click="isToNext('C2')">C2</van-button>
+            </van-col >
+          </div>
+          <div class="band-items">
+            <van-col span="24">
+              <van-button type="default" @click="isToNext('D1')">D1</van-button>
             </van-col>
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="isToNext('E')">E</van-button>
+              <van-button type="default" @click="isToNext('D2')">D2</van-button>
             </van-col>
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="isToNext('F')">F</van-button>
+              <van-button type="default" @click="isToNext('E1')">E1</van-button>
+            </van-col>
+          </div>
+          <div class="band-items">
+            <van-col span="24">
+              <van-button type="default" @click="isToNext('E2')">E2</van-button>
             </van-col>
           </div>
           <div class="" style="padding:50px">
@@ -169,7 +193,7 @@ export default {
       this.bandActive=false
       this.cupShow=true
       this.bandShow=false
-
+      //console.log(value)
       this.band=value;
         this.$store.dispatch('commithadcupsize',value)
       if (this.bandandcup.band!=""&&this.bandandcup.cup!=""){
@@ -212,11 +236,10 @@ export default {
   height:40px;
   margin-top:15px;
   //overflow: hidden;
-width:95%;
-  font-size:0.8rem;
+  width: 100%;
   .van-button{
-      width: 100%;
-      height:35px;
+    height:35px;
+    width:95%;
     border: 1px solid #afafb1;
   }
 }
@@ -230,9 +253,9 @@ width:95%;
   clear:both;
 }
 .size{
+  height:100vh;
   //border:1px solid #ff0000;
   position:relative;
-  //box-sizing: border-box;
 
   .size-title{
     box-sizing: border-box;
@@ -247,17 +270,18 @@ width:95%;
     width:70%;
     margin:0px auto 0 auto;
     button{
-      width: 100%;
-      font-size:0.8rem;
+      width: 100%
     }
     button:hover,button:focus{
       border:1px solid #ff0000;
     }
     .band-title{
+
       font-size:0.8rem;
     }
 
     .cup-title{
+
       font-size:0.8rem;
     }
 

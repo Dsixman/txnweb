@@ -1,7 +1,9 @@
 <template>
   <div class="">
-    <div class="cup-title">
-      杯数是否合适
+    <div class="title-wrapper" >
+      <div class="size-title">
+        是否感觉空杯或者压胸？
+      </div>
     </div>
     <div class="cup-content">
       <div class="swiper-container">
@@ -29,11 +31,15 @@ export default {
     return {
     }
   },
+  created(){
+    document.querySelector("meta[name='viewport']")["content"] = "width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"
+  },
   computed:{
     url:function(){
       let url2={prev:"",next:"",fatherobj:null}
       url2.prev="/fitbar"
       url2.next="/furu"
+      url2.nextbtn=true
       //url2.whichtype=url.whichtype
       return url2
     }
@@ -43,8 +49,8 @@ export default {
   },
   mounted(){
     new Swiper('.swiper-container', {
-       slidesPerView: 2,
-       spaceBetween: 30,
+       slidesPerView: "auto",
+       spaceBetween: 10,
        centeredSlides: true,
        loop: false,
      });
@@ -52,29 +58,43 @@ export default {
   methods:{
     savecupfit(eve){
       this.url.fatherobj=eve.target.innerText
-      console.log(eve.target.innerText)
+
       this.$store.dispatch("commitcupfit",eve.target.innerText)
-      console.log("cupfit ")
-      console.log(this.$store.state.cupfit)
+
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.cup-title{
-  margin:20px auto 0 auto;
-  height:140px;
-    line-height:120px;
+.size-title{
+  box-sizing: border-box;
+  padding-top:50px;
+  font-size:1rem;
+  font-weight: bold;
+  width:100%;
+  margin:0px auto 0px auto;
+  height:120px;
+}
+.title-wrapper{
+  width:80%;margin:0px auto 0 auto;
+}
+.title-img{
+  float:left;padding-top:20px
+}
+.clear{
+  clear:both;
 }
 .swiper-container {
 
-  margin-top:30px;
+  margin-top:0px;
 
-    width:70%;
-    height: 400px;
+    width:95%;
+    height: 305px;
+
     .swiper-slide {
 
+        height: 302px;
       span{
        position:absolute;
        bottom:10px;
@@ -82,7 +102,7 @@ export default {
        margin:0px
       }
       text-align: center;
-      font-size: 18px;
+      //font-size: 18px;
       //margin-top:50px;
       //background: #ff0000;
 
@@ -104,26 +124,35 @@ export default {
     }
     .swiper-slide:hover{
       border:1px solid #ff0000;
+        border-radius: 5px;
     }
     .swiper-wrapper{
-      :nth-child(1){
-        background:url('../assets/3-1.png') no-repeat 0% 0%;
+      div:nth-child(1){
+        width:220px;
+        background:url('../assets/5315.png') no-repeat;
+        background-size:100%
       }
-      :nth-child(2){
-        background: url('../assets/3-1.png') no-repeat 0 0;
+      div:nth-child(2){
+        width:220px;
+        background: url('../assets/5314.png') no-repeat;
+        background-size:100%
       }
-      :nth-child(3){
-        background: url('../assets/3-1.png') no-repeat 0% 0;
+      div:nth-child(3){
+        width:220px;
+        background: url('../assets/5318.png') no-repeat;
+        background-size:100%
       }
-      :nth-child(4){
-        background: url('../assets/3-1.png') no-repeat 0% 0;
+      div:nth-child(4){
+        width:220px;
+        background: url('../assets/5316kb.png') no-repeat;
+        background-size:100%
       }
-      :nth-child(5){
-        background: url('../assets/3-1.png') no-repeat 0% 0;
+      div:nth-child(5){
+        width:220px;
+        background: url('../assets/5317.png') no-repeat;
+        background-size:100%
       }
-      :nth-child(6){
-        background: url('../assets/3-1.png') no-repeat 0% 0;
-      }
+
 
     }
 	.swiper-slide-active,.swiper-slide-duplicate-active{

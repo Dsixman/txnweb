@@ -14,14 +14,13 @@
             <br >
             现在<br >
             请花1分钟的时间<br >
-            11道简单选择题 <br>
             从身体最柔软的部位出发<br >
             发现自己<br >
             找到刚好合适的尺码<br >
           </div>
           <br>
           <div class="" v-if="tick>3" style="margin-top:110px;">
-            <img src="@/assets/sylogo.png" width="200"/>
+            <img src="@/assets/sylogo.png" width="180"/>
           </div>
           <div id="third-animate" v-if="tick<=3" >
             <span>小胸聚拢不空杯</span><br >
@@ -56,9 +55,8 @@
 <script>
 // @ is an alias to /src
 
-
+//import Vue from 'vue'
 import HomeBottom from '@/components/HomeBottom.vue'
-import Vue from 'vue'
 //import bubbly from '@/common/bubbly'
 export default {
   name: 'Home',
@@ -67,7 +65,8 @@ export default {
       err:null,
       user:null,
       url:null,
-      tick:6,
+      //nickname:"",
+      tick:5,
       isAnimationStart:true,
       isShowPage:false,
 
@@ -93,48 +92,44 @@ export default {
     },
   },
   created(){
-
+    // let query=to.query
+    // let client=store.state.client
+    // let code=""
+    // let wxhaschect=store.state.wxhaschect
+    // if (Object.getOwnPropertyNames(query)){
+    //   if (query.state){
+    //     client=query.state
+    //     store.dispatch('commitclient',client)
+    //   }
+    //   if (query.code){
+    //     code=query.code
+    //   }
+    // }
+    // if(code||store.state.client=="wxgzh"){
+    //   if(wxhaschect==false){
+    //       store.dispatch("commitaddwxhaschect",true)
+    //     Vue.axios.post("https://www.tianxiaonei.com/wx/getuser/index.php",{code:code,wxhaschect:wxhaschect,client:"wxgzh"}).then(data=>{
+    //       window.console.log(data)
+    //       let res=JSON.parse(data.data)
+    //       window.console.log(res)
+    //       window.console.log(typeof(res))
+    //       store.dispatch("commitnickname",res.nickname)
+    //       store.dispatch("commitusericon",res.headimgurl)
+    //       store.dispatch("commitopid",res.openid)
+    //       store.dispatch("commitaddwxhaschect",true)
+    //       next()
+    //     }).catch(err=>{
+    //       if (err){
+    //         next({name:'Err'})
+    //       }
+    //     })
+    //   }
   },
   mounted(){
     //  bubbly({
     //   colorStart:"#fff0f0",
     //   colorStop: "#ffe9e4",
     // });
-    let query=this.$route.query
-    let client=this.$store.state.client
-    let code=""
-    let wxhaschect=this.$store.state.wxhaschect
-    if (Object.getOwnPropertyNames(query)){
-      if (query.state){
-        client=query.state
-      this.$store.dispatch('commitclient',client)
-      }
-      if (query.code){
-        code=query.code
-      }
-    }
-    if(code||this.$store.state.client=="wxgzh"){
-      if(wxhaschect==false){
-        Vue.axios.post("https://www.tianxiaonei.com/wx/getuser/index.php",{code:code,wxhaschect:wxhaschect,client:"wxgzh"}).then(data=>{
-          let res=null
-          if(typeof(data.data)=="string"){
-            res=JSON.parse(data.data)
-          }else{
-            res=data.data
-          }
-          //console.log(data)
-          // alert(typeof(res))
-
-          this.$store.dispatch("commitnickname",res.nickname)
-          this.$store.dispatch("commitusericon",res.headimgurl)
-          this.$store.dispatch("commitopid",res.openid)
-          this.$store.dispatch("commitaddwxhaschect",true)
-        }).catch(err=>{
-          this.$store.dispatch("commitgeterr",err)
-          this.$router.push('/err')
-        })
-      }
-    }
     this.countdown()
   },
   methods:{
@@ -291,6 +286,9 @@ filter(){
   position:absolute;
   top:0px;
   background:#ea042a;
+  //background:url("../assets/sybg4.jpg");
+  //background-size: cover;
+  //border:1px solid #ff0000;
 }
 .home-wrap{
   position:relative;
@@ -309,6 +307,7 @@ filter(){
     display: block;
     width:100%;
     line-height: 2.3rem;
+    //border:1px solid grey
     border:none;
     border-radius:3px;
   }

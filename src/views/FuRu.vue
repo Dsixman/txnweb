@@ -1,24 +1,23 @@
 <template >
   <div class="">
-    <div class="furu-title">
-      两边是否受到挤压
+    <div class="title-wrapper" >
+      <div class="size-title">
+        侧边勒吗？
+      </div>
     </div>
     <div class="furu-content">
       <div class="furu-img">
-        <img src="@/assets/fr.jpg" height="300"/>
+        <img src="@/assets/5319.png" height="300"/>
       </div>
       <van-row type="flex" justify="space-between">
         <van-col span="10">
-          <!-- <a href="javascript:void(0)" @click="savefuru($event)">
-            有
-          </a> -->
           <van-button  @click="savefuru($event)">
-            有
+            勒
           </van-button>
         </van-col>
         <van-col span="10">
           <van-button @click="savefuru($event)" >
-            没有
+            不勒
           </van-button>
       </van-col>
       </van-row>
@@ -35,6 +34,7 @@ export default {
       url:{
         prev:"/cupfit",
         next:"/jixiong",
+        nextbtn:false,
         fatherobj:null
       }
     }
@@ -42,12 +42,15 @@ export default {
   components:{
     Bottom,
   },
+  created(){
+    document.querySelector("meta[name='viewport']")["content"] = "width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"
+  },
   methods:{
     savefuru(eve){
-      //console.log(eve.target)
       this.url.fatherobj=eve.target.innerText
 
       this.$store.dispatch("commitfuru",this.url.fatherobj)
+      this.$router.push("/jixiong")
     }
   }
 }
@@ -56,7 +59,7 @@ export default {
 <style lang="scss" scoped>
 
 .van-col button{
-  font-size:1rem;
+  font-size:0.8rem;
     width:100%;
     height:40px;
     display:block;
@@ -65,21 +68,43 @@ export default {
     line-height:43px;
     color:#000;
 }
+.title-wrapper{
+  width:80%;margin:0px auto 0 auto;
+}
+.title-img{
+  float:left;padding-top:20px
+}
+.clear{
+  clear:both;
+}
+.size-title{
+  box-sizing: border-box;
+  padding-top:50px;
+  font-size:1rem;
+  font-weight: bold;
+  width:100%;
+  margin:0px auto 0px auto;
+  height:120px;
+}
+.van-button{
+  border: 1px solid #afafb1;
+  font-size:0.8rem;
+}
 .van-col button:hover,.vancol button:focus{
   color:red;
   border:1px solid red;
 }
 .furu-title{
-  margin:20px auto 0 auto;
+  margin:0px auto 0 auto;
   height:140px;
-  line-height:120px
+  line-height:140px
 }
 .furu-img{
-  margin-bottom:20px;
+  //margin-bottom:20px;
 }
 .furu-content{
   width: 80%;
-  margin:20px auto 0 auto;
+  margin:0px auto 0 auto;
   button{
     width: 100%
   }

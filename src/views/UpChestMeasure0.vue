@@ -15,7 +15,7 @@
           </div>
           <div class="step-form">
             <van-col span="18">
-               <van-field type="number"  v-model="stand" id="zhili" placeholder="请输入您测量到的数据" input-align="center" /><span v-if="zhiliformat" style="color:red;font-size:0.8rem">请输入正确的测量值</span>
+               <van-field type="number"  v-model="stand" placeholder="请输入您测量到的数据" input-align="center"/>
             </van-col>
             <van-col span="6" class="step-right-cm">
               cm
@@ -33,7 +33,7 @@
             </div>
             <div class="step-form">
               <van-col span="18">
-                 <van-field type="number" v-model="xieyao" id="xieyao" placeholder="请输入您测量到的数据" input-align="center" /><span v-if="xieyaoformat" style="color:red;font-size:0.8rem">直立或45度弯腰的测量值有误</span>
+                 <van-field type="number" v-model="xieyao" placeholder="请输入您测量到的数据" input-align="center"/>
               </van-col>
               <van-col span="6" class="step-right-cm">
                 cm
@@ -51,14 +51,16 @@
               </div>
               <div class="step-form">
                 <van-col span="18">
-                   <van-field type="number" v-model="zhijiao" id="zhijiao" placeholder="请输入您测量到的数据" input-align="center" /><span v-if="zhijiaoformat" style="color:red;font-size:0.8rem">输入的测量值有误</span>
+                   <van-field type="number" v-model="zhijiao" placeholder="请输入您测量到的数据" input-align="center"/>
                 </van-col>
                 <van-col span="6" class="step-right-cm">
                   cm
                 </van-col>
               </div>
             </van-col>
+
         </div>
+
         <Bottom :url="url"></Bottom>
 
   </div>
@@ -74,88 +76,14 @@ export default {
         next:"/result",
         nextbtn:true,
         fatherobj:null
-
       },
       stand:this.$store.state.standwidth,
       zhijiao:this.$store.state.zhijiao,
-      xieyao:this.$store.state.xieyao,
-      // zhiliformat:false,
-      // xieyaoformat:false,
-      // zhijiaoformat:false
-    }
-  },
-  computed:{
-    zhiliformat(){
-      let value=this.stand
-      if (value){
-        if (value>150||value<10){
-          return true
-        }else{
-          return false
-        }
-      }else{
-        return false
-      }
-
-    },
-    xieyaoformat(){
-      let value=this.xieyao
-      if (value){
-        if (value>150||value<10||(value-this.stand<-2)){
-          return true
-        }else{
-          return false
-        }
-      }else{
-        return false
-      }
-    },
-    zhijiaoformat(){
-      let value=this.zhijiao
-      if (value){
-        if (value>150||value<10||(value-this.xieyao<-2)){
-          return true
-        }else{
-          return false
-        }
-      }else{
-        return false
-      }
-
+      xieyao:this.$store.state.xieyao
     }
   },
   components:{
     Bottom
-  },
-  methods:{
-    // checkZhiLiInput(e){
-    //   let ele=e.target
-    //   let value=ele.value
-    //   //let tips=''
-    //   if (value>150||value<10){
-    //     this.zhiliformat=true
-    //   }
-    // },
-    // checkXieYaoInput(e){
-    //   let ele=e.target
-    //   let value=ele.value
-    //   //let tips=''
-    //   //console.log(value-this.stand)
-    // //  let chaer=
-    //   if (value>150||value<10||(value-this.stand<-2)){
-    //     this.xieyaoformat=true
-    //   }else{
-    //     this.xieyaoformat=false
-    //   }
-    // },
-    // checkZhiJiaoInput(e){
-    //     let ele=e.target
-    //     let value=ele.value
-    //     //let tips=''
-    //     if (value>150||value<10||(value-this.xieyao<-2)){
-    //       this.zhijiaoformat=true
-    //     }
-    //   }
   },
   created(){
 
@@ -165,14 +93,13 @@ export default {
 
   },
   updated(){
-    this.$store.dispatch('commitstandwidth',this.stand)
-    this.$store.dispatch('commitzhijiao',this.zhijiao)
-    this.$store.dispatch('commitxieyao',this.xieyao)
     if(this.stand!=""&&this.zhijiao!=""&&this.xieyao!=""){
       //console.log(this.stand)
       let data={stand:this.stand,zhijiao:this.zhijiao,xieyao:this.xieyao}
       this.$store.dispatch('commitupchestmeasure',data)
-
+      this.$store.dispatch('commitstandwidth',this.stand)
+      this.$store.dispatch('commitzhijiao',this.zhijiao)
+      this.$store.dispatch('commitxieyao',this.xieyao)
       this.url.fatherobj=data
     }
 
