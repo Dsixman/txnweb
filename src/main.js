@@ -2,10 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import Axios from 'axios'
+import VueAxios from 'vue-axios'
 import { Col, Row , Field, CellGroup,Icon,Swipe, SwipeItem,Picker,Popup,Button,Tab,Tabs } from 'vant';
 
 //Vue.use(Swiper)
-
+Vue.use(VueAxios,Axios)
 Vue.use(Col)
 Vue.use(Row)
 Vue.use(Field)
@@ -19,6 +21,9 @@ Vue.use(Button)
 Vue.use(Tab);
 Vue.use(Tabs);
 Vue.config.productionTip = false
+
+///Vue.axios.defaults.withCredentials = true
+
 
 new Vue({
   router,
