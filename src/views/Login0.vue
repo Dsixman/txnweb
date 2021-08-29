@@ -2,41 +2,57 @@
   <div class="wrapper">
     <div class="title-wrapper" >
       <div class="size-title">
-        要先登录呦
-      </div>
-      <div class="clear">
+        请使用手机短信验证登录
       </div>
     </div>
-    <!-- <van-icon name="phone" /> -->
     <div class="">
-      <div class="login-input">
+      <div class="input-wrap">
+        <div class="input-field" >
+          <div class="input-icon">
+             <van-icon name="phone-circle"/>
+          </div>
+          <div class="phone-input">
+              <input type="text" name="phone"  id="phone" placeholder="请输入手机号码"  class="phone-input-field" v-model="phone" />
+          </div>
+          <div class="clear">
 
-        <!-- <van-field input-align="center" id="phone" name="phone"  placeholder="请输入手机号码" v-model="phone" class="txn-input"></van-field>
-        <span :class="{warn:isphoneenter}" v-if="isphoneenter">{{phoneTips}}</span> -->
-        <div class="" style="border:1px solid #afafb1;border-radius:3px;">
-          <van-icon name="phone" />
-          <input type="text" name="" value="111" placeholder="请输入手机号码" style="border:none">
+          </div>
         </div>
       </div>
-      <div class="login-input">
-        <div class="login-captcha-left">
-          <van-field input-align="center" name="captcha" id="captcha" placeholder="验证码" v-model="entercaptcha" class="txn-input" ></van-field>
+      <span :class="{warn:isphoneenter}" v-if="isphoneenter">{{phoneTips}}</span>
+      <div class="input-wrap">
+          <div class="input-field">
+            <div class="input-icon" style="float:left;box-sizing:border-box;font-size:1.3rem">
+              <van-icon name="lock" />
+            </div>
+            <div class="yzm-input" >
+              <input type="text" name="captcha" id="captcha" placeholder="验证码" v-model="entercaptcha" style="border:none;width:100%" />
+            </div>
+            <div class="yzm-wrap" >
+                <button type="button" name="button"  id="yzm" @click="yzmfn">获取验证码</button>
+            </div>
+            <div class="clear">
+            </div>
         </div>
-
-        <div class="login-captcha-right">
-          <button type="button" name="button" id="yzm" @click="yzmfn">获取验证码</button>
-        </div>
-        <div class="clear">
-
-        </div>
-      <span v-if="iscapchaenter" :class="{warn:iscapchaenter}">{{catchaTips}}</span>
-        <div class="clear">
-
-        </div>
+        <span v-if="iscapchaenter" :class="{warn:iscapchaenter}">{{catchaTips}}</span>
       </div>
-      <div class="login-btn">
-        <van-button @click="login">登录</van-button>
+      <div class="secret">
+        <button type="button" name="secretbtn" id="secretbtn" @click="readSerect">
+          <div class="checked-icon">
+            <van-icon name="checked" id="checked-icon"/>
+          </div>
+          <div class="">
+            <span>用户协议与隐私保护</span>
+          </div>
+          <div class="clear">
+          </div>
+        </button>
       </div>
+      <div class="login-btn-wrap">
+        <van-button @click="login" class="login-btn">登录</van-button>
+      </div>
+      <p style="font-size:0.95rem;font-weight:bold;padding:2px;margin:0px;">0烦恼</p>
+      <div class="regist-tips">（“私人”管家式服务：一次测量即可，以后在各大平台，甜小内内衣闭着眼睛买，无需再选择码数，我们会根据你的电话号码，智能地给你发送对应的码数，就是这么的神奇！）</div>
     </div>
   </div>
 </template>
@@ -44,6 +60,7 @@
 <script>
   import Vue from "vue"
   import {timeFormat} from '@/common/utils.js'
+  import { Dialog } from 'vant';
 export default {
 
   data(){
@@ -60,6 +77,7 @@ export default {
       iscapchaenter:false,
       phoneerr:null,
       captchaerr:null,
+      comfirmstate:false
     }
   },
   created(){
@@ -68,10 +86,30 @@ export default {
   computed:{
 
   },
+  components:{
+
+  },
   mounted(){
 
   },
   methods:{
+    readSerect(){
+      document.getElementById("checked-icon").style="color:red"
+      Dialog.confirm({
+        title: '用户协议与隐私保护',
+        message: " 为了完整的实现本网站的测量功能和给予您更好的购买体验，本网站将搜集你的昵称，头像，以及手机号码。网站所生成和使用的个人信息，未经您个人许可，除非法律要求，这些信息不会被提供给任何第三方。如因公司活动须公开批露您的个人信息，我们将会通知你批露的目的，内容和方式，且必须征得您的同意才会批露。谢谢您对甜小内的支持。",
+        confirmButtonText:'同意',
+        cancelButtonText:'不同意',
+        width:'280px',
+      })
+      .then(() => {
+          document.getElementById("checked-icon").style="color:red";
+          this.comfirmstate=true
+        })
+      .catch(() => {
+            document.getElementById("checked-icon").style="color:rgb(44, 62, 80)"
+        });
+    },
     phoneformatter:function(){
       let str= /^[1][3,4,5,7,8][0-9]{9}$/;
       if (!str.test(this.phone)) {
@@ -91,23 +129,19 @@ export default {
       if(!this.phone){
         this.isphoneenter=true
       }else{
-        console.log("phone"+this.phone)
         this.phoneformatter()
-      //  console.log(res)
         if (this.isphoneenter==false){
 
           let phone=document.getElementById("phone").value
-          console.log("phone"+phone)
+
           if (phone){
-            console.log("phone1"+phone)
+
             Vue.axios.post('https://www.tianxiaonei.com/wx/smscaptcha/index.php',{phone:phone})
               .then(data=>{
-            console.log("phone2"+phone)
-            console.log(data)
+
               this.postcaptcha=data.data.captcha;
               this.phoneerr=data.data
             }).catch(err=>{
-              console.log(err)
               this.phoneerr=err
             })
           }
@@ -134,67 +168,109 @@ export default {
 
     },
     login:function(){
-      //console.log("123")
-      //alert(this.$store.state.opid)
       let time=timeFormat("yyyy-MM-dd HH:mm:ss");
-      if (this.phone&&this.entercaptcha){
-       if (this.postcaptcha==this.entercaptcha){
-        //if (this.entercaptcha=="1234"){
-         let post={phone:this.phone,wx_user_name:this.$store.state.nickname,wxicon:this.$store.state.usericon,openid:this.$store.state.opid,user_name:"",userid:"",sex:"",sign_up_time:time}
-          Vue.axios.post('https://www.tianxiaonei.com/wx/gettoken/index.php',post)
-          .then(data=>{
-            let res=data.data
-
-            if (typeof(res)=="string"){
-              res=JSON.parse(res)
-            }
-
-            let token=res.token
-            console.log(token)
-            localStorage.setItem('x-token',token)
-            let arr=token.split(".")
-            let payload=arr[1]
-            //alert(JSON.parse(atob(payload)).data)
-            let userid=JSON.parse(atob(payload)).data.userid
-            this.$store.dispatch('commitadduserid',userid)
-            this.$store.dispatch('commitaddphone',res.phone)
-            let url=this.$store.state.loginprevurl
-          //  alert(url)
-            if (url=="Personal"){
-              this.$router.push({name:'Personal'})
-            }else if(url=="BrandChoice"){
-                this.$router.push({name:'BrandChoice'})
-            }else{
-              this.$router.push({name:'Home'})
-            }
-          }).catch(err=>{
-            alert(err)
-            this.$store.dispatch('commitgeterr',err)
-            this.$router.push('/err')
-            console.log(err)
-          })
-        }else{
-          if(!this.entercaptcha){
-            this.iscapchaenter=true
+      if(this.comfirmstate){
+        if (this.phone&&this.entercaptcha){
+         if (this.postcaptcha==this.entercaptcha){
+           let post={phone:this.phone,wx_user_name:this.$store.state.nickname,wxicon:this.$store.state.usericon,openid:this.$store.state.opid,user_name:"",userid:"",sex:"",sign_up_time:time}
+            Vue.axios.post('https://www.tianxiaonei.com/wx/gettoken/index.php',post)
+            .then(data=>{
+              let res=data.data
+              if (typeof(res)=="string"){
+                res=JSON.parse(res)
+              }
+              let token=res.token
+              localStorage.setItem('x-token',token)
+              let arr=token.split(".")
+              let payload=arr[1]
+              let userid=JSON.parse(atob(payload)).data.userid
+              this.$store.dispatch('commitadduserid',userid)
+              this.$store.dispatch('commitaddphone',res.phone)
+              let url=this.$store.state.loginprevurl
+              if (url=="Personal"){
+                this.$router.push({name:'Personal'})
+              }else if(url=="BrandChoice"){
+                  this.$router.push({name:'BrandChoice'})
+              }else{
+                this.$router.push({name:'Home'})
+              }
+            }).catch(err=>{
+              this.$store.dispatch('commitgeterr',err)
+              this.$router.push('/err')
+            })
           }else{
-            this.captchaformatter()
+            if(!this.entercaptcha){
+              this.iscapchaenter=true
+            }else{
+              this.captchaformatter()
+            }
           }
         }
+      }else{
+        document.getElementById("checked-icon").style="color:red"
+        Dialog.confirm({
+          title: '用户协议与隐私保护',
+          message: " 为了完整的实现本网站的测量功能和给予您更好的购买体验，本网站将搜集你的昵称，头像，以及手机号码。网站所生成和使用的个人信息，未经您个人许可，除非法律要求，这些信息不会被提供给任何第三方。如因公司活动须公开批露您的个人信息，我们将会通知你批露的目的，内容和方式，且必须征得您的同意才会批露。谢谢您对甜小内的支持。",
+          confirmButtonText:'同意',
+          cancelButtonText:'不同意',
+          width:'280px',
+        })
+        .then(() => {
+            document.getElementById("checked-icon").style="color:red";
+            this.comfirmstate=true
+            if (this.phone&&this.entercaptcha){
+             if (this.postcaptcha==this.entercaptcha){
+               let post={phone:this.phone,wx_user_name:this.$store.state.nickname,wxicon:this.$store.state.usericon,openid:this.$store.state.opid,user_name:"",userid:"",sex:"",sign_up_time:time}
+                Vue.axios.post('https://www.tianxiaonei.com/wx/gettoken/index.php',post)
+                .then(data=>{
+                  let res=data.data
+                  if (typeof(res)=="string"){
+                    res=JSON.parse(res)
+                  }
+                  let token=res.token
+                  localStorage.setItem('x-token',token)
+                  let arr=token.split(".")
+                  let payload=arr[1]
+                  let userid=JSON.parse(atob(payload)).data.userid
+                  this.$store.dispatch('commitadduserid',userid)
+                  this.$store.dispatch('commitaddphone',res.phone)
+                  let url=this.$store.state.loginprevurl
+                  if (url=="Personal"){
+                    this.$router.push({name:'Personal'})
+                  }else if(url=="BrandChoice"){
+                      this.$router.push({name:'BrandChoice'})
+                  }else{
+                    this.$router.push({name:'Home'})
+                  }
+                }).catch(err=>{
+                  this.$store.dispatch('commitgeterr',err)
+                  this.$router.push('/err')
+                })
+              }else{
+                if(!this.entercaptcha){
+                  this.iscapchaenter=true
+                }else{
+                  this.captchaformatter()
+                }
+              }
+            }
+          })
+        .catch(() => {
+              document.getElementById("checked-icon").style="color:rgb(44, 62, 80)"
+          });
       }
-
-      // let url=this.$store.state.loginprevurl
-      // this.$router.push({name:url})
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
 .title-wrapper{
   width: 80%;margin:0 auto;
 }
 .clear{
-  claer:both;
+  clear:both;
 }
 .warn{
   color:red;
@@ -203,25 +279,66 @@ export default {
 .wrapper{
   width:80%;margin:0 auto;
 }
-.login-input{
+.input-wrap{
   width:80%;
   margin:15px auto 15px auto;
+  .input-field{
+    border:1px solid #afafb1;
+    border-radius:3px;
+    padding:10px;
+     background:white;
+    font-size:0.9rem;
+    height:44px;
+     box-sizing:border-box;
+     line-height:20px;
+    .input-icon{
+      float:left;
+      box-sizing:border-box;
+      font-size:1.3rem;
+      margin-right:4px;
+    }
+    .phone-input{
+      float:left;
+      width:80%;
+      .phone-input-field{
+        border:none;
+        width:100%;
+      }
+    }
+    .yzm-input{
+      float:left;width:48%
+    }
+    .yzm-wrap{
+    width:40%;float:left
+    }
+  }
+}
+.secret{
+  text-align: left;
+  width:80%;
+  margin:0 auto;
+  #secretbtn{
+    border:0px;
+    background: none;
+    .checked-icon{
+      padding-top:4px;
+    }
+    div{
+      float:left;
+    }
+  }
 }
 
-.login-captcha-left{
-  width: 50%;
-  float:left
-}
-.login-captcha-right{
-  width: 50%;
-  float:right;
-  text-align: right
-}
-.login-btn{
-width:50%;
+
+.login-btn-wrap{
+width:80%;
 margin:0 auto;
-.van-button{
+.login-btn{
   width:100%;
+  border-radius: 5px;
+  margin-top:20px;
+  color:white;
+  background:#dd9f9f;
 }
 }
 .honetips{
@@ -231,23 +348,26 @@ margin:0 auto;
 color:grey;
 }
 #yzm{
-  height:43px;
-  width:90%;
-  border:1px solid #afafb1;
+  border:none;
+  padding:0px;
+  margin:0px;
+  height:24px;
+  line-height: 24px;
+  width:100%;
+  //border:1px solid #afafb1;
   border-radius: 2px;
   font-size:0.8rem;
-  background: #ac2700;
-  color: #fff;
-  padding: 4px 10px;
+  //background: #ac2700;
+  color: #939393;
+  //padding: 0px 8px;
   border: none;
   outline: none;
   cursor: pointer;
 }
-#yzm:hover{
-  background: #00a8fe;
-}
+
 #yzm.disabled{
   background:grey;
+  color:white;
   cursor: auto;
 }
 #yzm.disabled:hover{
@@ -257,12 +377,16 @@ color:grey;
   float:left;padding-top:30px
 }
 .size-title{
-  float:left;
-  line-height:120px;
-  font-size:0.9rem;
+  box-sizing: border-box;
+  padding-top:50px;
+  font-size:1rem;
   font-weight: bold;
-  width:60%;
-  margin:20px auto 0 auto;
-  height:140px;
+  width:100%;
+  margin:0px auto 0px auto;
+  height:120px;
+}
+.regist-tips{
+  width:80%;margin:0 auto;color:grey;font-size:0.85rem;
+  text-align:left;
 }
 </style>

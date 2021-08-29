@@ -128,34 +128,6 @@ export default {
     Bottom
   },
   methods:{
-    // checkZhiLiInput(e){
-    //   let ele=e.target
-    //   let value=ele.value
-    //   //let tips=''
-    //   if (value>150||value<10){
-    //     this.zhiliformat=true
-    //   }
-    // },
-    // checkXieYaoInput(e){
-    //   let ele=e.target
-    //   let value=ele.value
-    //   //let tips=''
-    //   //console.log(value-this.stand)
-    // //  let chaer=
-    //   if (value>150||value<10||(value-this.stand<-2)){
-    //     this.xieyaoformat=true
-    //   }else{
-    //     this.xieyaoformat=false
-    //   }
-    // },
-    // checkZhiJiaoInput(e){
-    //     let ele=e.target
-    //     let value=ele.value
-    //     //let tips=''
-    //     if (value>150||value<10||(value-this.xieyao<-2)){
-    //       this.zhijiaoformat=true
-    //     }
-    //   }
   },
   created(){
 
@@ -169,7 +141,6 @@ export default {
     this.$store.dispatch('commitzhijiao',this.zhijiao)
     this.$store.dispatch('commitxieyao',this.xieyao)
     if(this.stand!=""&&this.zhijiao!=""&&this.xieyao!=""){
-      //console.log(this.stand)
       let data={stand:this.stand,zhijiao:this.zhijiao,xieyao:this.xieyao}
       this.$store.dispatch('commitupchestmeasure',data)
 

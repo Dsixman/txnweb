@@ -8,13 +8,12 @@
 
   <div class="swiper-container">
     <div class="swiper-wrapper">
-        <div class="swiper-slide" @click="saveshapes($event)"><span>圆盘型</span></div>
-        <div class="swiper-slide" @click="saveshapes($event)"><span>圆锥型</span></div>
-        <div class="swiper-slide" @click="saveshapes($event)"><span>半球型</span></div>
-        <div class="swiper-slide" @click="saveshapes($event)"><span>纺锤型</span></div>
-        <div class="swiper-slide" @click="saveshapes($event)"><span>水滴型</span></div>
-        <div class="swiper-slide" @click="saveshapes($event)"><span>木瓜型</span></div>
-        <div class="swiper-slide" @click="saveshapes($event)"><span>其他胸型</span></div>
+        <div class="swiper-slide" @click="saveshapes($event,1)" :class="{slideSelect:select1}"><span>圆盘型</span></div>
+        <div class="swiper-slide" @click="saveshapes($event,2)" :class="{slideSelect:select2}"><span>圆锥型</span></div>
+        <div class="swiper-slide" @click="saveshapes($event,3)" :class="{slideSelect:select3}"><span>半球型</span></div>
+        <div class="swiper-slide" @click="saveshapes($event,4)" :class="{slideSelect:select4}"><span>纺锤型</span></div>
+        <div class="swiper-slide" @click="saveshapes($event,5)" :class="{slideSelect:select5}"><span>水滴型</span></div>
+        <div class="swiper-slide" @click="saveshapes($event,6)" :class="{slideSelect:select6}"><span>木瓜型</span></div>
     </div>
   </div>
 
@@ -36,7 +35,13 @@ export default {
         fatherobj:null
       },
       shape:"",
-      wk:""
+      wk:"",
+      select1:false,
+      select2:false,
+      select3:false,
+      select4:false,
+      select5:false,
+      select6:false,
     }
   },
   created(){
@@ -47,13 +52,64 @@ export default {
     Bottom
   },
   methods:{
-    saveshapes(eve){
-      let shape=eve.target.innerText;
-      this.shape=shape
-      //let data={shape:shape}
-      this.$store.dispatch("commitchestshapes",shape)
-      this.url.fatherobj={shapes:shape}
-    },
+    saveshapes(e,id){
+      let text=e.target.innerText;
+      this.url.fatherobj=text
+      this.$store.dispatch('commitchestshapes',text)
+      if(id===1){
+        this.select1=true
+        this.select2=false
+        this.select3=false
+        this.select4=false
+        this.select5=false
+        this.select6=false
+        this.select7=false
+      }
+      if(id===2){
+        this.select1=false
+        this.select2=true
+        this.select3=false
+        this.select4=false
+        this.select5=false
+        this.select6=false
+        this.select7=false
+      }
+      if(id===3){
+        this.select1=false
+        this.select2=false
+        this.select3=true
+        this.select4=false
+        this.select5=false
+        this.select6=false
+        this.select7=false
+      }
+      if(id===4){
+        this.select1=false
+        this.select2=false
+        this.select3=false
+        this.select4=true
+        this.select5=false
+        this.select6=false
+        this.select7=false
+      }
+      if(id===5){
+        this.select1=false
+        this.select2=false
+        this.select3=false
+        this.select4=false
+        this.select5=true
+        this.select6=false
+        this.select7=false
+      }
+      if(id===6){
+        this.select1=false
+        this.select2=false
+        this.select3=false
+        this.select4=false
+        this.select5=false
+        this.select6=true
+      }
+    }
   },
   mounted(){
    new Swiper('.swiper-container', {
@@ -62,7 +118,8 @@ export default {
       centeredSlides: true,
       loop: false,
     });
-  }
+  },
+
 }
 </script>
 
@@ -75,6 +132,10 @@ export default {
 }
 .clear{
   clear:both;
+}
+.slideSelect{
+  border:2px solid #ff0000;
+  transform: scale(1)!important;
 }
 .size-title{
   box-sizing: border-box;
@@ -99,9 +160,7 @@ export default {
         }
       }
 }
-.van-button:focus{
-  border:1px solid #ff0000;
-}
+
 .shapes-title{
   float:left;
   font-size:0.9rem;
@@ -121,10 +180,8 @@ export default {
 }
 
 .swiper-container {
-  //margin-top:30px;
-
     width:100%;
-    height: 402px;
+    height: 62vh;
     .swiper-slide {
       width:220px;
       height:400px;
@@ -135,11 +192,6 @@ export default {
        margin:0px
       }
       text-align: center;
-      //font-size: 18px;
-      //margin-top:50px;
-      //background: #ff0000;
-
-      /* Center slide text vertically */
       display: -webkit-box;
       display: -ms-flexbox;
       display: -webkit-flex;
@@ -155,10 +207,7 @@ export default {
       transition: 300ms;
       transform: scale(0.8);
     }
-    .swiper-slide:hover{
-      border:1px solid #ff0000;
-      border-radius: 5px;
-    }
+
     .swiper-wrapper{
       div:nth-child(1){
         background:url('../assets/yp.png') no-repeat top center;
@@ -193,11 +242,9 @@ export default {
     }
 
 	.swiper-slide-active,.swiper-slide-duplicate-active{
-    transform: scale(1);
+    transform: scale(1)!important;
+    border-radius: 5px;
 	}
-  .swiper-slide:hover{
-    border:1px solid #ff0000;
-  }
 
 }
 </style>

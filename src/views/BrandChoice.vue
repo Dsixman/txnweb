@@ -18,23 +18,6 @@
             <van-button @click="savebrand($event)">甜小内</van-button>
           </van-col>
         </div>
-        <div class="brand-title">
-          <van-col span="24" class="brand-title-items">
-            <van-button @click="savebrand($event)">Ubras</van-button>
-          </van-col>
-        </div>
-        <div class="brand-title" >
-          <van-col span="24" class="brand-title-items">
-              <van-button @click="savebrand($event)">内外</van-button>
-          </van-col>
-
-        </div>
-        <div class="brand-title">
-          <van-col span="24" class="brand-title-items">
-            <van-button @click="savebrand($event)">蕉内</van-button>
-          </van-col>
-        </div>
-
 
         <div class="brand-title" >
           <van-col span="24" class="brand-title-items">
@@ -94,6 +77,11 @@
           </van-col>
         </div>
         <div class="brand-title">
+          <van-col span="24" class="brand-title-items">
+            <van-button @click="savebrand($event)">Ubras</van-button>
+          </van-col>
+        </div>
+        <div class="brand-title">
           <van-col span="24" class="brand-title-items" >
             <van-button @click="savebrand($event)">其他</van-button>
           </van-col>
@@ -136,9 +124,6 @@ created(){
 
   },
   methods: {
-  // trim (str) {
-  //     return str.replace(/(^[\s\n\t]+|[\s\n\t]+$)/g, "")
-  // }
    savebrand(eve){
      let txt=eve.target.innerText//苹果设备的浏览器获取的文字会添加空格
         txt=txt.replace(/(^[\s\n\t]+|[\s\n\t]+$)/g, "")
@@ -200,9 +185,6 @@ created(){
 .title-wrapper{
   width:80%;
   margin:0px auto 15px auto;
-
-//
-//  box-sizing: border-box;
 }
 .title-img{
   float:left;padding-top:20px
@@ -218,8 +200,6 @@ created(){
   .brand-title-items{
     height:40px;
     text-align: center;
-    //margin:0 auto;
-  //  box-sizing: content-box;
       button{
         background:white;
         box-sizing: border-box;

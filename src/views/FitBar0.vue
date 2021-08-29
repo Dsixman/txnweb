@@ -7,20 +7,20 @@
     </div>
     <div class="cup-content">
       <div class="swiper-container">
-        <!-- <div class="swiper-wrapper" id="swiper-wrapper">
+        <div class="swiper-wrapper" id="swiper-wrapper">
             <div class="swiper-slide"  @click="savefitbar($event,0)" :class="{slideSelect:select1}"><span>很紧</span></div>
             <div class="swiper-slide"  @click="savefitbar($event,1)" :class="{slideSelect:select2}"><span>稍微有些紧</span></div>
             <div class="swiper-slide"  @click="savefitbar($event,2)" :class="{slideSelect:select3}"><span>刚刚好</span></div>
             <div class="swiper-slide"  @click="savefitbar($event,3)" :class="{slideSelect:select4}"><span>稍微有些松</span></div>
             <div class="swiper-slide"  @click="savefitbar($event,4)" :class="{slideSelect:select5}"><span>很松</span></div>
-        </div> -->
-        <div class="swiper-wrapper" id="swiper-wrapper">
+        </div>
+        <!-- <div class="swiper-wrapper" id="swiper-wrapper">
             <div class="swiper-slide"  @click="savefitbar($event,1)" :class="{slideSelect:select1}"><span>很紧</span></div>
             <div class="swiper-slide"  @click="savefitbar($event,2)" :class="{slideSelect:select2}"><span>稍微有些紧</span></div>
             <div class="swiper-slide"  @click="savefitbar($event,3)" :class="{slideSelect:select3}"><span>刚刚好</span></div>
             <div class="swiper-slide"  @click="savefitbar($event,4)" :class="{slideSelect:select4}"><span>稍微有些松</span></div>
             <div class="swiper-slide"  @click="savefitbar($event,5)" :class="{slideSelect:select5}"><span>很松</span></div>
-        </div>
+        </div> -->
       </div>
     </div>
     <Bottom :url="url"></Bottom>
@@ -75,48 +75,66 @@ export default {
        loop: false,
      });
   },
-
+  // beforeDestroy(){
+  //   let text=this.$el.getElementsByClassName("swiper-slide swiper-slide-active")[0].innerText
+  //   this.$store.dispatch("commitfitbar",text)
+  // },
   methods:{
+    // savefitbar(e,id){
+    //   let text=e.target.innerText;
+    //   this.url.fatherobj=text
+    //   this.$store.dispatch('commitcupfit',text)
+    //   if(id===1){
+    //     this.select1=true
+    //     this.select2=false
+    //     this.select3=false
+    //     this.select4=false
+    //     this.select5=false
+    //   }
+    //   if(id===2){
+    //     this.select1=false
+    //     this.select2=true
+    //     this.select3=false
+    //     this.select4=false
+    //     this.select5=false
+    //   }
+    //   if(id===3){
+    //     this.select1=false
+    //     this.select2=false
+    //     this.select3=true
+    //     this.select4=false
+    //     this.select5=false
+    //   }
+    //   if(id===4){
+    //     this.select1=false
+    //     this.select2=false
+    //     this.select3=false
+    //     this.select4=true
+    //     this.select5=false
+    //   }
+    //   if(id==5){
+    //     this.select1=false
+    //     this.select2=false
+    //     this.select3=false
+    //     this.select4=false
+    //     this.select5=true
+    //   }
+    // }
     savefitbar(e,id){
       let text=e.target.innerText;
       this.url.fatherobj=text
       this.$store.dispatch('commitfitbar',text)
-      if(id===1){
-        this.select1=true
-        this.select2=false
-        this.select3=false
-        this.select4=false
-        this.select5=false
-      }
-      if(id===2){
-        this.select1=false
-        this.select2=true
-        this.select3=false
-        this.select4=false
-        this.select5=false
-      }
-      if(id===3){
-        this.select1=false
-        this.select2=false
-        this.select3=true
-        this.select4=false
-        this.select5=false
-      }
-      if(id===4){
-        this.select1=false
-        this.select2=false
-        this.select3=false
-        this.select4=true
-        this.select5=false
-      }
-      if(id==5){
-        this.select1=false
-        this.select2=false
-        this.select3=false
-        this.select4=false
-        this.select5=true
-      }
-
+      let swiperWrap=document.getElementById("swiper-wrapper")
+      let slidelist=swiperWrap.getElementsByTagName("div")
+    //  console.log(slidelist)
+      //let slidelistLen=slidelist.length
+      slidelist.forEach((item, i) => {
+        if (i!==id){
+          item.style=""
+        }else{
+          item.style="border:2px solid #ff0000"
+        }
+      });
 
       // for(let i=0;i<=slidelistLen;i++){
       //   console.log(slidelist[i])
@@ -159,7 +177,7 @@ export default {
   margin-top:0px;
 
     width:95%;
-    height: 62vh;
+    height: 57vh;
     .swiper-slide {
       height:302px;
       box-sizing: border-box;

@@ -5,6 +5,9 @@
         <div class="size-title">
           宝，您经常穿什么品牌呢?
         </div>
+        <div class="" style="font-size:0.7rem">
+          (文胸品牌千千万,甜小内是我最爱)
+        </div>
       </div>
 
       <div class="content-wrapper">
@@ -18,18 +21,6 @@
             <van-button @click="savebrand($event)">Ubras</van-button>
           </van-col>
         </div>
-        <div class="brand-title" >
-          <van-col span="24" class="brand-title-items">
-              <van-button @click="savebrand($event)">内外</van-button>
-          </van-col>
-
-        </div>
-        <div class="brand-title">
-          <van-col span="24" class="brand-title-items">
-            <van-button @click="savebrand($event)">蕉内</van-button>
-          </van-col>
-        </div>
-
 
         <div class="brand-title" >
           <van-col span="24" class="brand-title-items">

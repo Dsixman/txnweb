@@ -86,7 +86,7 @@ export default {
   width:100%;
   margin:20px auto 20px auto;
   height:50px;
-  //border:1px solid #ff0000;
+
 }
 .wrapper{
   .size-content{
@@ -95,7 +95,6 @@ export default {
     box-sizing:border-box;
 
     .size-items{
-      //font-size:0.8rem;
       height:40px;
       margin-bottom:10px;
       button{

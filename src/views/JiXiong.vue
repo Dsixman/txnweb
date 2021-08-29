@@ -62,7 +62,6 @@ export default {
     height:40px;
     display:block;
     margin:0 auto;
-    //padding:0 15px;
     line-height:43px;
     color:#000;
     .van-button{
@@ -93,7 +92,6 @@ export default {
 }
 
 .furu-img{
-//  margin-bottom:20px;
 }
 .furu-content{
   width: 80%;

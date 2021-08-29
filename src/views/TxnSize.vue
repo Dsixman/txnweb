@@ -15,42 +15,41 @@
         </van-row>
         <van-row  class="band-content" type="flex" justify="space-between" v-show="bandShow">
           <div class="band-items">
-            <van-col span="24" class="">
-              <van-button  type="default" @click="tocup(60)">60</van-button>
-            </van-col>
-          </div>
-          <div class="band-items">
             <van-col span="24" >
-              <van-button  type="default" @click="tocup(65)">65</van-button>
+              <van-button  type="default" @click="tocup(65)">65/30</van-button>
             </van-col>
           </div>
 
           <div class="band-items">
             <van-col span="24" >
-              <van-button  type="default" @click="tocup(70)">70</van-button>
+              <van-button  type="default" @click="tocup(70)">70/32</van-button>
             </van-col>
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="tocup(75)">75</van-button>
+              <van-button type="default" @click="tocup(75)">75/34</van-button>
             </van-col>
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="tocup(80)">80</van-button>
+              <van-button type="default" @click="tocup(80)">80/36</van-button>
             </van-col>
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="tocup(85)">85</van-button>
+              <van-button type="default" @click="tocup(85)">85/38</van-button>
             </van-col>
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="tocup(90)">90</van-button>
+              <van-button type="default" @click="tocup(90)">90/40</van-button>
             </van-col>
           </div>
-
+          <div class="band-items">
+            <van-col span="24">
+              <van-button type="default" @click="tocup(90)">95/42</van-button>
+            </van-col>
+          </div>
         </van-row>
         <van-row v-show="cupShow" class="cup-content" type="flex" justify="space-between" >
           <van-col span="24" class="band-items">
@@ -149,32 +148,11 @@ export default {
 
   },
   computed:{
-    // band:function(){
-    //   let band=""
-    //   console.log(this.$store.hadcupsize)
-    //   if (this.$store.hadcupsize){
-    //       band=this.$store.state.hadcupsize;
-    //   }else{
-    //       band="码数"
-    //   }
-    //   return band
-    // },
-    // cup:function(){
-    //   let cup=""
-    //   if (this.$store.state.hadcup){
-    //       cup=this.$store.state.hadcup;
-    //   }else{
-    //       cup="杯号"
-    //   }
-    //   return cup
-    // },
   },
   components:{
     Bottom,
   },
   methods:{
-    // getprev(value){
-    // },
     changeBandActive(){
       this.bandActive=true;
       this.cupActive=false;
@@ -193,22 +171,18 @@ export default {
       this.bandActive=false
       this.cupShow=true
       this.bandShow=false
-      //console.log(value)
+
       this.band=value;
         this.$store.dispatch('commithadcupsize',value)
       if (this.bandandcup.band!=""&&this.bandandcup.cup!=""){
-        //this.$store.dispatch('commithadsize',this.bandandcup)
         this.$router.push('/fitbar')
       }
-      //this.$store.dispatch('commitprevurl','hadsize')
-
     },
     isToNext(value){
       this.bandandcup.cup=value
       this.cup=value
         this.$store.dispatch('commithadcup',value)
       if(this.hadcup!=""&&this.hadcupsizes!=""){
-      //  this.$store.dispatch('commithadsize',this.bandandcup)
         this.$router.push('/fitbar')
       }
     }
@@ -218,10 +192,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .hadsize-bottom{
-//   width:80%;
-//   overflow:auto;margin:20px auto 0 auto;
-// }
 
 .active{
   border-bottom:1px solid #ff0000;
@@ -235,7 +205,6 @@ export default {
 .band-items{
   height:40px;
   margin-top:15px;
-  //overflow: hidden;
   width: 100%;
   .van-button{
     height:35px;
@@ -254,7 +223,6 @@ export default {
 }
 .size{
   height:100vh;
-  //border:1px solid #ff0000;
   position:relative;
 
   .size-title{

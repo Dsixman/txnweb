@@ -5,11 +5,8 @@
         请使用手机短信验证登录
       </div>
     </div>
-    <!-- <van-icon name="phone" /> -->
     <div class="">
       <div class="input-wrap">
-        <!-- <van-field input-align="center" id="phone" name="phone"  placeholder="请输入手机号码" v-model="phone" class="txn-input"></van-field>
-        <span :class="{warn:isphoneenter}" v-if="isphoneenter">{{phoneTips}}</span> -->
         <div class="input-field" >
           <div class="input-icon">
              <van-icon name="phone-circle"/>
@@ -36,8 +33,6 @@
             </div>
             <div class="clear">
             </div>
-
-          <!-- <van-field input-align="center" name="captcha" id="captcha" placeholder="验证码"  class="txn-input" ></van-field> -->
         </div>
         <span v-if="iscapchaenter" :class="{warn:iscapchaenter}">{{catchaTips}}</span>
       </div>
@@ -56,6 +51,8 @@
       <div class="login-btn-wrap">
         <van-button @click="login" class="login-btn">登录</van-button>
       </div>
+      <p style="font-size:0.95rem;font-weight:bold;padding:2px;margin:0px;">0烦恼</p>
+      <div class="regist-tips">（“私人”管家式服务：一次测量即可，以后在各大平台，甜小内内衣闭着眼睛买，无需再选择码数，我们会根据你的电话号码，智能地给你发送对应的码数，就是这么的神奇！）</div>
     </div>
   </div>
 </template>
@@ -80,7 +77,7 @@ export default {
       iscapchaenter:false,
       phoneerr:null,
       captchaerr:null,
-      comfirmstate:false
+      comfirmstate:true
     }
   },
   created(){
@@ -104,7 +101,6 @@ export default {
         confirmButtonText:'同意',
         cancelButtonText:'不同意',
         width:'280px',
-
       })
       .then(() => {
           document.getElementById("checked-icon").style="color:red";
@@ -121,7 +117,6 @@ export default {
       }else{
         this.isphoneenter=false
       }
-
     },
     captchaformatter:function(){
       let str= /^[0-9]{6}$/;
@@ -135,14 +130,10 @@ export default {
       }else{
         this.phoneformatter()
         if (this.isphoneenter==false){
-
           let phone=document.getElementById("phone").value
-
           if (phone){
-
             Vue.axios.post('https://www.tianxiaonei.com/wx/smscaptcha/index.php',{phone:phone})
               .then(data=>{
-
               this.postcaptcha=data.data.captcha;
               this.phoneerr=data.data
             }).catch(err=>{
@@ -168,8 +159,6 @@ export default {
           }, 1000)
         }
       }
-
-
     },
     login:function(){
       let time=timeFormat("yyyy-MM-dd HH:mm:ss");
@@ -180,13 +169,10 @@ export default {
             Vue.axios.post('https://www.tianxiaonei.com/wx/gettoken/index.php',post)
             .then(data=>{
               let res=data.data
-
               if (typeof(res)=="string"){
                 res=JSON.parse(res)
               }
-
               let token=res.token
-
               localStorage.setItem('x-token',token)
               let arr=token.split(".")
               let payload=arr[1]
@@ -204,7 +190,6 @@ export default {
                 this.$router.push({name:'Home'})
               }
             }).catch(err=>{
-              alert(err)
               this.$store.dispatch('commitgeterr',err)
               this.$router.push('/err')
             })
@@ -216,14 +201,7 @@ export default {
             }
           }
         }
-      }else{
-        Dialog.alert({
-          message: '请先阅读用户及隐私协议',
-        }).then(() => {
-
-        });
       }
-
     }
   }
 }
@@ -286,6 +264,7 @@ export default {
     border:0px;
     background: none;
     .checked-icon{
+      color:red;
       padding-top:4px;
     }
     div{
@@ -301,7 +280,7 @@ margin:0 auto;
 .login-btn{
   width:100%;
   border-radius: 5px;
-  margin-top:30px;
+  margin-top:20px;
   color:white;
   background:#dd9f9f;
 }
@@ -317,6 +296,7 @@ color:grey;
   padding:0px;
   margin:0px;
   height:24px;
+  line-height: 24px;
   width:100%;
   //border:1px solid #afafb1;
   border-radius: 2px;
@@ -348,5 +328,9 @@ color:grey;
   width:100%;
   margin:0px auto 0px auto;
   height:120px;
+}
+.regist-tips{
+  width:80%;margin:0 auto;color:grey;font-size:0.85rem;
+  text-align:left;
 }
 </style>

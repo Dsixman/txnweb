@@ -15,7 +15,6 @@
           <span>{{user_txncup}}</span>
         </div>
         <div class="clear">
-
         </div>
       </div>
     </div>
@@ -53,7 +52,6 @@ export default {
       return this.$store.state.personaldata
     }
   },
-
   created(){
     let token=localStorage.getItem("x-token")
     if (!this.$store.state.personaldata){

@@ -1,6 +1,13 @@
 <template >
   <div class="home-wrap" >
-    <div class="title-wrapper">
+    <div class="progress-animate-wrap" v-if="animate">
+      <div class="progress-wrap">
+        <div class="progress">
+        </div>
+        <p class="progress-title">根据所有内容，甜小内正在快马加鞭运算中。</p>
+      </div>
+    </div>
+    <div class="title-wrapper" v-if="isShowPage">
       <div v-if="isfcup" class="result-main" >
         感谢您的支持 <br>
         目前F1以上的罩杯<br>
@@ -9,14 +16,17 @@
       </div>
       <div v-else class="result-main" >
         根据甜小内 <br>
-        “半码”精细化罩杯尺码表 <br>
+        “半码”个性化专属尺码表 <br>
         您的尺码为：{{$store.state.txncup}}<br>
-        forget it <br>
+        forget it!<br>
         无需占用您的大脑容量 <br>
         以后你的每次购买 <br>
         无需再测量 <br>
+        无需再选择码数<br>
         甜小内会给您发送对应的码数 <br>
         <br>
+        <img src="../assets/hei.png" alt="" width="200">
+
       </div>
 
       <div class="clear">
@@ -39,14 +49,16 @@ export default {
         nextbtn:true,
         fatherobj:null
       },
+      isShowPage:false,
+      animate:true,
+      val:0,
     }
   },
   components:{
     Bottom,
   },
   created(){
-
-          let time=timeFormat("yyyy-MM-dd HH:mm:ss");
+          let time=timeFormat("yyyy-MM-dd HH:mm:ss")
           let token=localStorage.getItem("x-token")
           let arr=token.split(".")
           let payload=arr[1]
@@ -82,7 +94,6 @@ export default {
            time:time,
          }
          this.postdata=data
-         window.console.log(data)
           Vue.axios.post("https://www.tianxiaonei.com/wx/savedata.php",data,{
             headers:{
               "x-token":token
@@ -96,7 +107,6 @@ export default {
                 this.$router.push('/err')
             }
           }).catch(err=>{
-            //alert(err)
             if (typeof(err)!="string"){
               this.$store.dispatch('commitgeterr',JSON.stringify(err))
             }
@@ -107,6 +117,14 @@ export default {
     document.querySelector("meta[name='viewport']")["content"] = "width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"
   },
   mounted(){
+    setTimeout(()=>{
+      this.animate=false
+      this.isShowPage=true
+    },2000)
+
+  },
+  methods:{
+
   },
   updated(){
 
@@ -124,10 +142,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+@keyframes progress-animate{
+  0%{
+    width:0px;
+  }
+  100%{
+    width: 100%;
+  }
+}
+.progress{
+  height:30px;
+  background: #ff7a6d;
+  //background:#abbbdd;
+  animation: progress-animate 2s;
+  border-radius: 5px;
+}
+.progress-wrap{
+  background:grey;width:80%;height:30px;border-radius:5px;
+  margin:0 auto;
+}
+.progress-animate-wrap{
+  height:100vh;
+  box-sizing:border-box;
+  padding-top:48%;
+}
+.progress-title{
+  font-size:1rem;
+  font-weight: bold;
+}
 .home-wrap{
   position:relative;
   height:100vh;
-//  border:1px solid #ff0000;
   box-sizing: border-box;
 }
 .title-wrapper{
@@ -144,11 +190,11 @@ export default {
 .result-main{
   line-height: 2rem;
   float:left;
-  //line-height:120px;
   font-size:0.9rem;
   width:100%;
   margin:0px auto 0 auto;
   padding-top:50px;
   height:140px;
+
 }
 </style>

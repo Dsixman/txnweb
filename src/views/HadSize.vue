@@ -15,38 +15,38 @@
 
           <div class="band-items">
             <van-col span="24" >
-              <van-button  type="default" @click="tocup(65)">65</van-button>
+              <van-button  type="default" @click="tocup(65)">65/30</van-button>
             </van-col>
           </div>
 
           <div class="band-items">
             <van-col span="24" >
-              <van-button  type="default" @click="tocup(70)">70</van-button>
+              <van-button  type="default" @click="tocup(70)">70/32</van-button>
             </van-col>
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="tocup(75)">75</van-button>
+              <van-button type="default" @click="tocup(75)">75/34</van-button>
             </van-col>
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="tocup(80)">80</van-button>
+              <van-button type="default" @click="tocup(80)">80/36</van-button>
             </van-col>
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="tocup(85)">85</van-button>
+              <van-button type="default" @click="tocup(85)">85/38</van-button>
             </van-col>
           </div>
           <div class="band-items">
             <van-col span="24">
-              <van-button type="default" @click="tocup(90)">90</van-button>
+              <van-button type="default" @click="tocup(90)">90/40</van-button>
             </van-col>
           </div>
           <div class="band-items">
             <van-col span="24" class="">
-              <van-button  type="default" @click="tocup(95)">95</van-button>
+              <van-button  type="default" @click="tocup(95)">95/42</van-button>
             </van-col>
           </div>
 
@@ -125,25 +125,7 @@ export default {
 
   },
   computed:{
-    // band:function(){
-    //   let band=""
-    //   console.log(this.$store.hadcupsize)
-    //   if (this.$store.hadcupsize){
-    //       band=this.$store.state.hadcupsize;
-    //   }else{
-    //       band="码数"
-    //   }
-    //   return band
-    // },
-    // cup:function(){
-    //   let cup=""
-    //   if (this.$store.state.hadcup){
-    //       cup=this.$store.state.hadcup;
-    //   }else{
-    //       cup="杯号"
-    //   }
-    //   return cup
-    // },
+
   },
   components:{
     Bottom,

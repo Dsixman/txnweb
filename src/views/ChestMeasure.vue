@@ -1,9 +1,6 @@
 <template>
   <div class="">
     <div class="title-wrapper" >
-      <!-- <div class="title-img">
-        <img src="@/assets/m1.png"  width="90">
-      </div> -->
       <div class="size-title">
         请先测量您下胸围的数据
       </div>
@@ -64,8 +61,6 @@ export default {
     return {
       tuqi:this.$store.state.tuqi,
       huxi:this.$store.state.huxi,
-      //tuqiformat:false,
-      //huxiformat:false,
     }
   },
   created(){

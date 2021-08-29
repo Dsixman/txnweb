@@ -94,7 +94,6 @@ export default {
   },
   updated(){
     if(this.stand!=""&&this.zhijiao!=""&&this.xieyao!=""){
-      //console.log(this.stand)
       let data={stand:this.stand,zhijiao:this.zhijiao,xieyao:this.xieyao}
       this.$store.dispatch('commitupchestmeasure',data)
       this.$store.dispatch('commitstandwidth',this.stand)

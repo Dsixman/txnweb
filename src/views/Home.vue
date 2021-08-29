@@ -1,51 +1,52 @@
 <template>
-
 <div class="home-wrap">
-  <!-- <canvas class="home-qipao">
-  </canvas> -->
-    <div id="home-animate" class="home-animate" v-if="isAnimationStart" @click="animationEnd">
-      <div id="tickcount">{{tick}}S</div>
-
-          <div class="" id="first-animate" v-if="tick>3" >
-            <span>嘿，{{lishiname}}</span><br>
-            <span >终于等到你</span><br >
+    <div id="home-animate" class="home-animate" v-if="isShow" @click="toNext(1)" @touchend="toNext(1)">
+          <div class="first-animate" v-if="firstShow">
+            <div class="">
+              <span>嘿，{{lishiname}}</span><br>
+              <span >终于等到你</span><br >
+            </div>
+            <div style="margin-top:20px;">
+              现在<br >
+              请花1分钟的时间<br >
+              11道简单选择题 <br>
+              从身体最柔软的部位出发<br >
+              发现自己<br >
+              找到刚好合适的尺码<br >
+              <span>不止舒适  更有型</span>
+            </div>
           </div>
-          <div class="" id="second-animate" v-if="tick>3" >
-            <br >
-            现在<br >
-            请花1分钟的时间<br >
-            11道简单选择题 <br>
-            从身体最柔软的部位出发<br >
-            发现自己<br >
-            找到刚好合适的尺码<br >
-          </div>
-          <br>
-          <div class="" v-if="tick>3" style="margin-top:110px;">
-            <img src="@/assets/sylogo.png" width="200"/>
-          </div>
-          <div id="third-animate" v-if="tick<=3" >
-            <span>小胸聚拢不空杯</span><br >
+          <div class="first-animate" v-if="secondShow">
+            <div >
+              <span>小胸好看不空杯</span><br >
               <span>大胸承托不压胸</span><br >
-              <span>更加舒适有型</span><br >
+            </div>
+            <div style="margin-top:20px;">
+              <span >不敷衍的你</span><br />
+              从此刻开始<br>
+              享受甜小内带给你的美好<br />
+            </div>
+            <div style="margin-top:20px;">
+              <img src="@/assets/sylogo.png" width="200"/>
+            </div>
           </div>
-          <div class="" id="forth-animate" v-if="tick<=3">
-            <span >不敷衍的你</span><br />
-            从此刻开始<br>
-            享受甜小内带给你的美好<br />
-          </div>
+          <div class="next-btn">
 
+          </div>
     </div>
     <div class="home-main">
       <van-row class="home" type="flex" justify="space-between" v-if="isShowPage">
         <van-col span="24" class="app-test-img" >
           <img src="@/assets/jz.png" alt="" >
         </van-col>
-        <van-col  span="12" offset="6">
-          <button type="button" name="button3" @click="filter" class="app-test-home-a">立即测量</button>
-        </van-col>
+
+          <van-col  span="14" offset="5">
+            <div class="ljwrap">
+              <van-button @click="filter" class="app-test-home-a">立即测量</van-button>
+            </div>
+          </van-col>
 
         <p class="tips"><span >Tips:</span>请提前准备一根软尺和一面镜子哦</p>
-
       </van-row>
     </div>
     <HomeBottom></HomeBottom>
@@ -54,9 +55,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
-
 import HomeBottom from '@/components/HomeBottom.vue'
 import Vue from 'vue'
 //import bubbly from '@/common/bubbly'
@@ -67,9 +65,12 @@ export default {
       err:null,
       user:null,
       url:null,
-      tick:6,
-      isAnimationStart:true,
+      tick:8,
+      count:1,
       isShowPage:false,
+      isShow:true,
+      firstShow:true,
+      secondShow:false,
 
     }
   },
@@ -84,13 +85,7 @@ export default {
         return "朋友"
       }
     },
-    isnew:function(){
-      if( this.$store.state.wxhaschect ){
-        return "yes"
-      }else{
-        return "no"
-      }
-    },
+
   },
   created(){
 
@@ -122,9 +117,6 @@ export default {
           }else{
             res=data.data
           }
-          //console.log(data)
-          // alert(typeof(res))
-
           this.$store.dispatch("commitnickname",res.nickname)
           this.$store.dispatch("commitusericon",res.headimgurl)
           this.$store.dispatch("commitopid",res.openid)
@@ -135,9 +127,20 @@ export default {
         })
       }
     }
-    this.countdown()
+    // this.countdown()
   },
   methods:{
+    toNext(page){
+      if(page===this.count){
+        this.firstShow=false;
+        this.secondShow=true;
+        this.count=this.count+1
+      }else{
+        this.secondShow=false;
+        this.isShow=false;
+        this.isShowPage=true;
+      }
+    },
      countdown(){
       let timer=null
       timer = setInterval(()=>{
@@ -173,7 +176,7 @@ filter(){
 }
 </script>
 <style lang="scss">
-#first-animate{
+.first-animate{
   position:relative;
 //  top:-50px;
   width: 100%;
@@ -194,70 +197,30 @@ filter(){
 //   }
 // }
 
-#second-animate{
-  position:relative;
-  //top:-50px;
-  width: 60%;
-  color:white;
-  text-align: center;
-  //margin-top:70px;
-  top:110px;
-  left:20%;
-  font-size:1.2rem;
-  font-weight: bold;
-  line-height: 2rem;
-  color:white;
-  //animation:mysecond 1s;
-}
-// @keyframes mysecond
-// {
-//   0%{top:50px;left:-100px;}
-//   100%{top:50px;left:20%}
-// }
-#third-animate{
-  position:relative;
-//  top:-50px;
-  width: 100%;
-  top:120px;
-  //animation:myfirst 1s;
-    text-align: center;
-    //margin-top:70px;
-    font-size:1.2rem;
-    font-weight: bold;
-    line-height: 2rem;
-    color:white;
+
+.next-btn{
+  //position:relative;
+  position:absolute;
+  bottom:75px;
+  left:47%;
+  margin:0 auto;
+  width:45px;
+  height:45px;
+  background:url('../assets/upbtn.png') no-repeat center center;
+  background-size:80%;
+  animation:myfirst 2s infinite;
+
 }
 
-#forth-animate{
-  position:relative;
-  //top:-50px;
-  width: 60%;
-  color:white;
-  text-align: center;
-  //margin-top:70px;
-  top:140px;
-  left:20%;
-  font-size:1.2rem;
-  font-weight: bold;
-  line-height: 2rem;
-  color:white;
-  //animation:myforth 1s;
+@keyframes myfirst{
+  0% {
+    opacity:0.25;bottom:75px;
+  }
+  100%{
+    opacity:1;bottom:120px;
+  }
 }
 
-// @keyframes myforth
-// {
-//   0%{top:80px;left:-100px;}
-//   100%{top:80px;left:20%}
-// }
-
-.imp{
-  //color:#da0101;
-  //color:#9b1a00;
-  font-size:1.2rem;
-  font-weight:blod;
-  color:black;
-  //color:#b00000;
-}
 .home-main{
   position:absolute;
   top:0px;
@@ -269,21 +232,14 @@ filter(){
   color:white;
   //border:1px solid #ff0000
 }
-// .wish{
-//   text-align: center;
-//   //margin-top:70px;
-//   font-size:1.2rem;
-//   font-weight: bold;
-//   line-height: 2rem;
-//   color:white;
-//   font-family: "宋体",sans-serif,PingFang SC,"PingFang SC";
-// //  letter-spacing:0.5rem;
-// }
+
 .tips{
-  font-size: 0.8rem;
+  font-size: 1rem;
   color:grey;
   text-align: center;
   width:100%;
+  font-weight: bold;
+  margin:5px;
 }
 .home-animate{
   padding:0px;
@@ -307,13 +263,16 @@ filter(){
     font-size: 0.9rem;
     background:#dd9f9f;
     display: block;
-    width:100%;
+    width:95%;
     line-height: 2.3rem;
     border:none;
     border-radius:3px;
   }
   .app-test-img{
-    margin-top:20px;margin-bottom:30px
+    margin-top:20px;margin-bottom:20px
   }
+}
+.ljwrap{
+  width:100%;height:3rem;padding-top:10px;width:100%
 }
 </style>

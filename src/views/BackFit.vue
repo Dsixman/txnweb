@@ -6,13 +6,14 @@
       </div>
     </div>
     <div class="cup-content">
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" @click="savebackfit($event)"><span>很紧</span></div>
-          <div class="swiper-slide" @click="savebackfit($event)"><span>比较紧</span></div>
-          <div class="swiper-slide" @click="savebackfit($event)"><span>刚刚好</span></div>
-          <div class="swiper-slide" @click="savebackfit($event)"><span>比较松</span></div>
-          <div class="swiper-slide" @click="savebackfit($event)"><span>很松</span></div>
+      <div class="swiper-container" id="swiper-container">
+        <div class="swiper-wrapper" id="swiper-wrapper">
+          <!-- <div class="swiper-slide" @click="savebackfit($event)"><span>很紧</span></div> -->
+          <div class="swiper-slide" @click="savebackfit($event,1)" :class="{slideSelect:select1}"><span>很紧</span></div>
+          <div class="swiper-slide" @click="savebackfit($event,2)" :class="{slideSelect:select2}"><span>比较紧</span></div>
+          <div class="swiper-slide" @click="savebackfit($event,3)" :class="{slideSelect:select3}"><span>刚刚好</span></div>
+          <div class="swiper-slide" @click="savebackfit($event,4)" :class="{slideSelect:select4}"><span>比较松</span></div>
+          <div class="swiper-slide" @click="savebackfit($event,5)" :class="{slideSelect:select5}"><span>很松</span></div>
         </div>
       </div>
     </div>
@@ -33,7 +34,12 @@ export default {
         next:"/cupfit",
         nextbtn:true,
         fatherobj:null
-      }
+      },
+      select1:false,
+      select2:false,
+      select3:false,
+      select4:false,
+      select5:false,
     }
   },
   computed:{
@@ -54,11 +60,47 @@ export default {
        loop: false,
      });
   },
-  methods:{
-    savebackfit(eve){
-      this.url.fatherobj=eve.target.innerText
 
-      this.$store.dispatch("commitbackfit",this.url.fatherobj)
+  methods:{
+    savebackfit(e,id){
+      let text=e.target.innerText;
+      this.url.fatherobj=text
+      this.$store.dispatch('commitbackfit',text)
+      if(id===1){
+        this.select1=true
+        this.select2=false
+        this.select3=false
+        this.select4=false
+        this.select5=false
+      }
+      if(id===2){
+        this.select1=false
+        this.select2=true
+        this.select3=false
+        this.select4=false
+        this.select5=false
+      }
+      if(id===3){
+        this.select1=false
+        this.select2=false
+        this.select3=true
+        this.select4=false
+        this.select5=false
+      }
+      if(id===4){
+        this.select1=false
+        this.select2=false
+        this.select3=false
+        this.select4=true
+        this.select5=false
+      }
+      if(id==5){
+        this.select1=false
+        this.select2=false
+        this.select3=false
+        this.select4=false
+        this.select5=true
+      }
     }
   },
 }
@@ -67,10 +109,6 @@ export default {
 <style lang="scss" scoped>
 .wrapper{
 
-}
-.swiper-slide:hover{
-  border:1px solid #ff0000;
-    border-radius: 5px;
 }
 .title-wrapper{
   width:90%;margin:0px auto 0 auto;
@@ -90,12 +128,13 @@ export default {
   margin:0px auto 0px auto;
   height:120px;
 }
-
+.slideSelect{
+  border:2px solid #ff0000;
+  transform: scale(1)!important;
+}
 .swiper-container {
-  margin-top:0px;
-
     width:100%;
-    height: 305px;
+    height: 62vh;
     .swiper-slide {
       height:302px;
       span{
@@ -126,36 +165,34 @@ export default {
 
       div:nth-child(1){
         width:220px;
-        background:url('../assets/hj1.png') no-repeat 0% 0%;
+        background:url('../assets/hj1.png') no-repeat;
         background-size:100%
       }
       div:nth-child(2){
         width:220px;
-        background: url('../assets/lj1.png') no-repeat 10% 0;
+        background: url('../assets/lj1.png') no-repeat;
           background-size:100%
       }
       div:nth-child(3){
         width:220px;
-        background: url('../assets/hs1.png') no-repeat 10% 0;
+        background: url('../assets/hs1.png') no-repeat;
           background-size:100%
       }
       div:nth-child(4){
         width:220px;
-        background: url('../assets/ls1.png') no-repeat 10% 0;
+        background: url('../assets/ls1.png') no-repeat;
           background-size:100%
       }
       div:nth-child(5){
         width:220px;
-        background: url('../assets/fcs1.png') no-repeat 10% 0;
+        background: url('../assets/fcs1.png') no-repeat;
           background-size:100%
       }
 
     }
 	.swiper-slide-active,.swiper-slide-duplicate-active{
-    transform: scale(1);
-  //  border:1px solid #ff0000;
+    transform: scale(1)!important;
     border-radius: 5px;
-    //  background-color: #fff1ce!important;
 	}
 
 }

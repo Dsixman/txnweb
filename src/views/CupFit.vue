@@ -8,11 +8,11 @@
     <div class="cup-content">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" @click="savecupfit($event)"><span>压胸</span></div>
-            <div class="swiper-slide" @click="savecupfit($event)"><span>稍微压胸</span></div>
-            <div class="swiper-slide" @click="savecupfit($event)"><span>刚刚好</span></div>
-            <div class="swiper-slide" @click="savecupfit($event)"><span>有些空杯</span></div>
-            <div class="swiper-slide" @click="savecupfit($event)"><span>空杯</span></div>
+            <div class="swiper-slide" @click="savecupfit($event,1)" :class="{slideSelect:select1}"><span>压胸</span></div>
+            <div class="swiper-slide" @click="savecupfit($event,2)" :class="{slideSelect:select2}"><span>稍微压胸</span></div>
+            <div class="swiper-slide" @click="savecupfit($event,3)" :class="{slideSelect:select3}"><span>刚刚好</span></div>
+            <div class="swiper-slide" @click="savecupfit($event,4)" :class="{slideSelect:select4}"><span>有些空杯</span></div>
+            <div class="swiper-slide" @click="savecupfit($event,5)" :class="{slideSelect:select5}"><span>空杯</span></div>
         </div>
       </div>
     </div>
@@ -29,6 +29,11 @@ export default {
   name:"cupfit",
   data(){
     return {
+      select1:false,
+      select2:false,
+      select3:false,
+      select4:false,
+      select5:false,
     }
   },
   created(){
@@ -37,15 +42,56 @@ export default {
   computed:{
     url:function(){
       let url2={prev:"",next:"",fatherobj:null}
-      url2.prev="/fitbar"
+      url2.prev="/backfit"
       url2.next="/furu"
       url2.nextbtn=true
-      //url2.whichtype=url.whichtype
       return url2
     }
   },
   components:{
     Bottom
+  },
+  methods:{
+    savecupfit(e,id){
+      let text=e.target.innerText;
+      this.url.fatherobj=text
+      this.$store.dispatch('commitcupfit',text)
+      if(id===1){
+        this.select1=true
+        this.select2=false
+        this.select3=false
+        this.select4=false
+        this.select5=false
+      }
+      if(id===2){
+        this.select1=false
+        this.select2=true
+        this.select3=false
+        this.select4=false
+        this.select5=false
+      }
+      if(id===3){
+        this.select1=false
+        this.select2=false
+        this.select3=true
+        this.select4=false
+        this.select5=false
+      }
+      if(id===4){
+        this.select1=false
+        this.select2=false
+        this.select3=false
+        this.select4=true
+        this.select5=false
+      }
+      if(id==5){
+        this.select1=false
+        this.select2=false
+        this.select3=false
+        this.select4=false
+        this.select5=true
+      }
+    }
   },
   mounted(){
     new Swiper('.swiper-container', {
@@ -55,14 +101,13 @@ export default {
        loop: false,
      });
   },
-  methods:{
-    savecupfit(eve){
-      this.url.fatherobj=eve.target.innerText
+  // beforeDestroy(){
+  //   let text=this.$el.getElementsByClassName("swiper-slide swiper-slide-active")[0].innerText
+  //   this.$store.dispatch("commitcupfit",text)
+  // },
 
-      this.$store.dispatch("commitcupfit",eve.target.innerText)
 
-    }
-  },
+
 }
 </script>
 
@@ -85,16 +130,16 @@ export default {
 .clear{
   clear:both;
 }
+.slideSelect{
+  border:2px solid #ff0000;
+    transform: scale(1)!important;
+}
 .swiper-container {
-
   margin-top:0px;
-
     width:95%;
-    height: 305px;
-
+    height: 62vh;
     .swiper-slide {
-
-        height: 302px;
+    height: 302px;
       span{
        position:absolute;
        bottom:10px;
@@ -102,11 +147,6 @@ export default {
        margin:0px
       }
       text-align: center;
-      //font-size: 18px;
-      //margin-top:50px;
-      //background: #ff0000;
-
-      /* Center slide text vertically */
       display: -webkit-box;
       display: -ms-flexbox;
       display: -webkit-flex;
@@ -122,10 +162,7 @@ export default {
       transition: 300ms;
       transform: scale(0.8);
     }
-    .swiper-slide:hover{
-      border:1px solid #ff0000;
-        border-radius: 5px;
-    }
+
     .swiper-wrapper{
       div:nth-child(1){
         width:220px;
@@ -156,6 +193,7 @@ export default {
 
     }
 	.swiper-slide-active,.swiper-slide-duplicate-active{
+    border-radius: 5px;
     transform: scale(1);
 	}
 

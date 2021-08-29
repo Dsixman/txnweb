@@ -52,7 +52,6 @@ export default {
     return {
       ifwk:null,
       index:null,
-
     }
   },
   created(){
