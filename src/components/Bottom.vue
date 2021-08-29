@@ -1,7 +1,6 @@
 <template>
   <div class="">
     <div class="filter-bottom">
-
     </div>
     <div class="bottom" >
       <van-row type="flex" justify="center">
@@ -81,15 +80,14 @@ export default {
           }
         }
         if(this.$route.path=="/cupfit"){
-          //console.log(this.$store.state.cupfit)
           if (this.$store.state.cupfit===null){
               change.word="请先选择"
               change.isSelect=false
           }else{
               change.word="下一页"
               change.isSelect=true
-
           }
+
         }
         if(this.$route.path=="/furu"){
           if (this.$store.state.furu===null){
@@ -110,6 +108,7 @@ export default {
           }
         }
         if(this.$route.path=="/backfit"){
+
           if (this.$store.state.backfit===null){
               change.word="请先选择"
               change.isSelect=false
@@ -117,6 +116,7 @@ export default {
               change.word="下一页"
               change.isSelect=true
           }
+
         }
         if(this.$route.path=="/chestmeasure"){
 
@@ -141,25 +141,17 @@ export default {
         }
 
         if(this.$route.path=="/chestshapes"){
-
-          if (this.$store.state.chestshapes==null){
+          if (this.$store.state.chestshapes===null){
               change.word="请先选择"
               change.isSelect=false
           }else{
               change.word="下一页"
               change.isSelect=true
           }
+
         }
         if(this.$route.path=="/result"){
           change.word="下一页"
-          //change.isSelect=true
-          // if (this.$store.state.chestshapes==null){
-          //     change.word="请先选择"
-          //     change.isSelect=false
-          // }else{
-          //     change.word="下一页"
-          //     change.isSelect=true
-          // }
         }
         return change
 
@@ -172,7 +164,6 @@ export default {
       this.$router.push(this.url.prev)
     },
     nextpage(){
-      //alert(this.$store.state.chestshapes)
       this.$router.push(this.url.next)
 
       // if(this.$route.path=="/chestmeasure"){
@@ -182,26 +173,26 @@ export default {
   },
   mounted(){
     if (this.$route.path=="/backfit"){
-      if(this.$store.state.backfit){
-        document.getElementById("nextbtn").disabled=""
-      }else{
-          document.getElementById("nextbtn").disabled=true
-      }
+          if (this.$store.state.backfit){
+            document.getElementById("nextbtn").disabled=""
+          }else{
+            document.getElementById("nextbtn").disabled=true
+          }
     }
     if (this.$route.path=="/fitbar"){
+              //console.log(this.$store.state.fitbar)
+      if (this.$store.state.fitbar){
 
-      if(this.$store.state.fitbar){
         document.getElementById("nextbtn").disabled=""
       }else{
-          document.getElementById("nextbtn").disabled=true
+        document.getElementById("nextbtn").disabled=true
       }
     }
     if (this.$route.path=="/cupfit"){
-
-      if(this.$store.state.cupfit){
-        document.getElementById("nextbtn").disabled=""
+      if (this.$store.state.cupfit){
+        document.getElementById("nextbtn").disabled=false
       }else{
-          document.getElementById("nextbtn").disabled=true
+        document.getElementById("nextbtn").disabled=true
       }
     }
 
@@ -215,11 +206,13 @@ export default {
     }
 
     if (this.$route.path=="/chestshapes"){
-      if(this.$store.state.chestshapes){
-        document.getElementById("nextbtn").disabled=""
+      if (this.$store.state.chestshapes){
+        document.getElementById("nextbtn").disabled=false
       }else{
-          document.getElementById("nextbtn").disabled=true
+        document.getElementById("nextbtn").disabled=true
       }
+        //document.getElementById("nextbtn").disabled=""
+
     }
     if (this.$route.path=="/chestmeasure"){
       if(this.$store.state.chestmeasure.tuqi!=""&&this.$store.state.chestmeasure.xiqi!=""){
@@ -241,15 +234,9 @@ export default {
   updated(){
 
     if(this.url.fatherobj){
-//alert(this.url.fatherobj)
       document.getElementById("nextbtn").disabled=""
     }else{
-    //  alert("this.url.fatherobj:"+this.url.fatherobj)
         document.getElementById("nextbtn").disabled=true
-
-        // this.changetype.isSelect=false
-        // this.changetype.word="请先填写数据"
-        // alert(this.changetype.isSelect)
     }
   }
 
@@ -285,8 +272,10 @@ export default {
   color:black!important
 }
 .btnhover{
-  background:#FFB6C1;
-  color:white
+  //background:#FFB6C1;
+  background:#c86d6d;
+  color:white;
+  border:none!important
 }
 .rtleft{
   transform:rotate(90deg);
@@ -296,16 +285,13 @@ export default {
 .prev-page{
 
   width:45%;
-  //border: 1px solid #ebedf0;
-  //border-radius:2px ;
+
   float:left;
   font-size:1rem;
   height:40px;
   div{
     float:left
   }
-
-
 }
 a:link,a:visited {
   box-sizing: content-box;
