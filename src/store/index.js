@@ -5,21 +5,87 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    brand:null,
-    nosize:null,
+    //code:null,
+    records:null,
+    err:null,
+    username:"",
+    loginprevurl:"",
+    wxhaschect:false,
+    phone:'',
+    userid:"",
+    client:'',
+    personaldata:null,
+    wxuser:null,
+    opid:"",
+    nickname:"",
+    usericon:"",
+    brand:"",
+    nosize:"",
     hadsize:{cup:"",num:""},
+    hadcup:"",
+    hadcupsize:0,
     chestmeasure:{tuqi:"",xiqi:""},
-    chestshapes:{shape:"",wk:""},
+    huxi:null,
+    tuqi:null,
+    avgsxw:0.00,
+    chestshapes:null,
     cupfit:null,
     fitbar:null,
     furu:null,
     jixiong:null,
     backfit:null,
-    upchestmeasure:null,
-    prevurl:null
+    upchestmeasure:{stand:"",xieyao:"",zhijiao:""},
+    standwidth:null,
+    xieyao:null,
+    zhijiao:null,
+    prevurl:null,
+    ifwk:null,
+    wkdistance:null,
+    txncup:"",
+    time:"",
+    code:null,
     //prevurltype:null
   },
   mutations: {
+    getrecords(state,value){
+      state.recores=value
+    },
+    geterr(state,value){
+      state.err=value
+    },
+    addloginprevurl(state,value){
+      state.loginprevurl=value
+    },
+    addusername(state,value){
+      state.username=value
+    },
+    addwxhaschect(state,value){
+      state.wxhaschect=value
+    },
+    addphone(state,value){
+      state.phone=value
+    },
+    addcode(state,value){
+      state.code=value
+    },
+    adduserid(state,value){
+      state.userid=value
+    },
+    getclient(state,value){
+      state.client=value
+    },
+    addwxuser(state,value){
+      state.wxuser=value
+    },
+    selectavgsxw(state,value){
+      state.avgsxw=value
+    },
+    selecttxncup(state,value){
+      state.txncup=value
+    },
+    selectpersonaldata(state,value){
+      state.personaldata=value
+    },
     selectbrand(state,value){
       state.brand=value
     },
@@ -28,6 +94,12 @@ export default new Vuex.Store({
     },
     selecthadsize(state,value){
       state.hadsize=value
+    },
+    selecthadcup(state,value){
+      state.hadcup=value
+    },
+    selecthadcupsize(state,value){
+      state.hadcupsize=value
     },
     selectchestmeasure(state,value){
       state.chestmeasure=value
@@ -50,14 +122,84 @@ export default new Vuex.Store({
     selectbackfit(state,value){
       state.backfit=value
     },
+    selectwkdistance(state,value){
+      state.wkdistance=value
+    },
+    selectifwk(state,value){
+      state.ifwk=value
+    },
     selectupchestmeasure(state,value){
       state.upchestmeasure=value
     },
+    selectstandwidth(state,value){
+      state.standwidth=value
+    },
+    selectxieyao(state,value){
+      state.xieyao=value
+    },
+    selectzhijiao(state,value){
+      state.zhijiao=value
+    },
+    selectopid(state,value){
+      state.opid=value
+    },
+    selectnickname(state,value){
+      state.nickname=value
+    },
+    selectusericon(state,value){
+      state.usericon=value
+    },
+    selecthuxi(state,value){
+      state.huxi=value
+    },
+    selecttuqi(state,value){
+      state.tuqi=value
+    },
+
     selectprevurl(state,value){
       state.prevurl=value
     }
   },
   actions: {
+    commitgetrecords(context,value){
+      context.commit('getrecords',value)
+    },
+    commitgeterr(context,value){
+      context.commit('geterr',value)
+    },
+    commitaddloginprevurl(context,value){
+      context.commit('addloginprevurl',value)
+    },
+    commitaddusername(context,value){
+      context.commit('addusername',value)
+    },
+    commitaddphone(context,value){
+      context.commit('addphone',value)
+    },
+    commitadduserid(context,value){
+      context.commit('adduserid',value)
+    },
+    commitclient(context,value){
+      context.commit('getclient',value)
+    },
+    commitaddwxhaschect(context,value){
+      context.commit('addwxhaschect',value)
+    },
+    commitaddwxuser(context,value){
+      context.commit('addwxuser',value)
+    },
+    commitaddcode(context,value){
+      context.commit('addcode',value)
+    },
+    commitavgsxw(context,value){
+      context.commit('selectavgsxw',value)
+    },
+    committxncup(context,value){
+      context.commit('selecttxncup',value)
+    },
+    commitpersonaldata(context,value){
+      context.commit('selectpersonaldata',value)
+    },
     commitbrand(context,value){
       context.commit('selectbrand',value)
     },
@@ -93,6 +235,42 @@ export default new Vuex.Store({
     },
     commitprevurl(context,value){
       context.commit('selectprevurl',value)
+    },
+    commitwkdistance(context,value){
+      context.commit('selectwkdistance',value)
+    },
+    commitifwk(context,value){
+      context.commit('selectifwk',value)
+    },
+    commithadcup(context,value){
+      context.commit('selecthadcup',value)
+    },
+    commithadcupsize(context,value){
+      context.commit('selecthadcupsize',value)
+    },
+    commitnickname(context,value){
+      context.commit('selectnickname',value)
+    },
+    commithuxi(context,value){
+      context.commit('selecthuxi',value)
+    },
+    committuqi(context,value){
+      context.commit('selecttuqi',value)
+    },
+    commitstandwidth(context,value){
+      context.commit('selectstandwidth',value)
+    },
+    commitxieyao(context,value){
+      context.commit('selectxieyao',value)
+    },
+    commitzhijiao(context,value){
+      context.commit('selectzhijiao',value)
+    },
+    commitopid(context,value){
+      context.commit('selectopid',value)
+    },
+    commitusericon(context,value){
+      context.commit('selectusericon',value)
     }
   },
   modules: {
