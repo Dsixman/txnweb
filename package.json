@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "txnweb",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -17,6 +17,7 @@
     "vue": "^2.6.11",
     "vue-axios": "^3.2.4",
     "vue-router": "^3.2.0",
+    "vue-simple-progress": "^1.1.1",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
@@ -34,6 +35,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
+    "style-loader": "^3.2.1",
     "vue-template-compiler": "^2.6.11"
   }
 }
