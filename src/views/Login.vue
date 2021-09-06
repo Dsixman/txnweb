@@ -1,5 +1,5 @@
 <template >
-  <div class="wrapper">
+  <div class="wrapper" v-if="isAgree">
     <div class="title-wrapper" >
       <div class="size-title">
         请使用手机短信验证登录
@@ -36,18 +36,18 @@
         </div>
         <span v-if="iscapchaenter" :class="{warn:iscapchaenter}">{{catchaTips}}</span>
       </div>
-      <div class="secret">
+      <!-- <div class="secret">
         <button type="button" name="secretbtn" id="secretbtn" @click="readSerect">
           <div class="checked-icon">
             <van-icon name="checked" id="checked-icon"/>
           </div>
           <div class="">
-            <span>用户协议与隐私保护</span>
+            <span>用户隐私保护</span>
           </div>
           <div class="clear">
           </div>
         </button>
-      </div>
+      </div> -->
       <div class="login-btn-wrap">
         <van-button @click="login" class="login-btn">登录</van-button>
       </div>
@@ -77,7 +77,8 @@ export default {
       iscapchaenter:false,
       phoneerr:null,
       captchaerr:null,
-      comfirmstate:true
+      comfirmstate:true,
+      isAgree:false
     }
   },
   created(){
@@ -90,24 +91,25 @@ export default {
 
   },
   mounted(){
-
+    this.readSerect();
   },
   methods:{
     readSerect(){
-      document.getElementById("checked-icon").style="color:red"
+
       Dialog.confirm({
-        title: '用户协议与隐私保护',
-        message: " 为了完整的实现本网站的测量功能和给予您更好的购买体验，本网站将搜集你的昵称，头像，以及手机号码。网站所生成和使用的个人信息，未经您个人许可，除非法律要求，这些信息不会被提供给任何第三方。如因公司活动须公开批露您的个人信息，我们将会通知你批露的目的，内容和方式，且必须征得您的同意才会批露。谢谢您对甜小内的支持。",
+        title: '用户隐私保护',
+        message: " 我们非常重视您的个人信息和隐私保护，为了完整的实现本网站的测量功能和给予您更好的购买体验，本网站将搜集你的昵称，头像，以及手机号码。网站所生成和使用的个人信息，未经您个人许可，除非法律要求，这些信息不会被提供给任何第三方，谢谢您对甜小内的支持。",
         confirmButtonText:'同意',
         cancelButtonText:'不同意',
         width:'280px',
       })
       .then(() => {
-          document.getElementById("checked-icon").style="color:red";
+          // document.getElementById("checked-icon").style="color:red";
+          this.isAgree=true
           this.comfirmstate=true
         })
       .catch(() => {
-            document.getElementById("checked-icon").style="color:rgb(44, 62, 80)"
+            this.$router.push('/')
         });
     },
     phoneformatter:function(){

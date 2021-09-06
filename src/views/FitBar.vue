@@ -2,7 +2,7 @@
   <div class="">
     <div class="title-wrapper" >
       <div class="size-title">
-        肩带松紧情况如何？
+          刚买时，肩带松紧情况如何？
       </div>
     </div>
     <div class="cup-content">

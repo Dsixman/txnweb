@@ -4,26 +4,26 @@
           <div class="first-animate" v-if="firstShow">
             <div class="">
               <span>嘿，{{lishiname}}</span><br>
-              <span >终于等到你</span><br >
             </div>
             <div style="margin-top:20px;">
               现在<br >
               请花1分钟的时间<br >
-              11道简单选择题 <br>
+              11道简单题目 <br>
               从身体最柔软的部位出发<br >
-              发现自己<br >
-              找到刚好合适的尺码<br >
-              <span>不止舒适  更有型</span>
+              发现自己刚好合适的<br >
+              细分 “半码” 文胸码数<br >
+              <span>不止舒适 而且...</span>
             </div>
           </div>
           <div class="first-animate" v-if="secondShow">
             <div >
-              <span>小胸好看不空杯</span><br >
-              <span>大胸承托不压胸</span><br >
+              <span>小胸好看有型</span><br >
+              <span>大胸承托显小</span><br >
+              <span>不空杯不压胸</span><br >
             </div>
             <div style="margin-top:20px;">
               <span >不敷衍的你</span><br />
-              从此刻开始<br>
+              从此时此刻<br>
               享受甜小内带给你的美好<br />
             </div>
             <div style="margin-top:20px;">
@@ -33,23 +33,29 @@
           <div class="next-btn">
 
           </div>
-    </div>
-    <div class="home-main">
-      <van-row class="home" type="flex" justify="space-between" v-if="isShowPage">
-        <van-col span="24" class="app-test-img" >
-          <img src="@/assets/jz.png" alt="" >
-        </van-col>
-
-          <van-col  span="14" offset="5">
-            <div class="ljwrap">
-              <van-button @click="filter" class="app-test-home-a">立即测量</van-button>
+          <div class="beian">
+            <p style="padding:0px;margin:0px;padding-top:10px;"><a href="https://www.tianxiaonei.com" style="color:#939393;font-weight: normal;font-size:1rem;">东莞市莞欣服饰有限公司</a></p>
+            <div class="" style="box-size:border-box;text-decoration:none;">
+              <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44190002005613" style="display:inline-block;text-decoration:none;background:white;width:300px;font-size:1rem;margin:0 auto;text-align:center;color:#939393;">粤公网安备 44190002005613号</a>
             </div>
-          </van-col>
-
-        <p class="tips"><span >Tips:</span>请提前准备一根软尺和一面镜子哦</p>
-      </van-row>
+          </div>
     </div>
-    <HomeBottom></HomeBottom>
+
+    <div class="home-main" v-if="isShowPage">
+      <van-row class="home" type="flex" justify="space-between" >
+          <p class="tips"><span >Tips:</span>请提前准备一根软尺和一面镜子哦</p>
+          <van-col span="24" class="app-test-img" >
+            <img src="@/assets/jz.png" alt="" >
+          </van-col>
+            <van-col  span="14" offset="5">
+              <div class="ljwrap">
+                <van-button @click="filter" class="app-test-home-a">立即测量</van-button>
+              </div>
+            </van-col>
+        </van-row>
+        <HomeBottom></HomeBottom>
+    </div>
+
 </div>
 
 </template>
@@ -71,6 +77,7 @@ export default {
       isShow:true,
       firstShow:true,
       secondShow:false,
+
 
     }
   },
@@ -177,10 +184,10 @@ filter(){
 </script>
 <style lang="scss">
 .first-animate{
-  position:relative;
+
 //  top:-50px;
   width: 100%;
-  top:120px;
+padding-top:120px;
 //  animation:myfirst 1s;
     text-align: center;
     //margin-top:70px;
@@ -188,14 +195,17 @@ filter(){
     font-weight: bold;
     line-height: 2rem;
     color:white;
+    box-sizing: border-box;
+
 }
-// @keyframes myfirst
-// {
-//   0%{top:-50px;}
-//   100%{
-//     top:60px;
-//   }
-// }
+.beian{
+  position: absolute;
+  bottom:0px;
+  width:100%;
+  box-sizing: border-box;
+  font-weight: normal;
+  background:white;
+}
 
 
 .next-btn{
@@ -222,8 +232,7 @@ filter(){
 }
 
 .home-main{
-  position:absolute;
-  top:0px;
+  padding-top:95px;
 }
 #tickcount{
   text-align:right;
@@ -243,21 +252,19 @@ filter(){
 }
 .home-animate{
   padding:0px;
-  width:100%;height:100vh;
-  position:absolute;
-  top:0px;
+  width:100%;
+  height:100vh;
   background:#ea042a;
+  box-sizing: border-box;
 }
 .home-wrap{
   position:relative;
   height:100vh;
   overflow: auto;
-  //border:1px solid #ff0000;
   box-sizing:border-box;
 }
 .clear{clear:both}
 .home{
-  margin-top:80px;
   .app-test-home-a{
     color:white;
     font-size: 0.9rem;

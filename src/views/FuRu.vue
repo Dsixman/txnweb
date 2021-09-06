@@ -2,7 +2,7 @@
   <div class="">
     <div class="title-wrapper" >
       <div class="size-title">
-        侧边勒吗？
+        刚买时，侧边勒吗？
       </div>
     </div>
     <div class="furu-content">

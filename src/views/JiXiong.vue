@@ -2,7 +2,7 @@
   <div class="">
     <div class="title-wrapper" >
       <div class="size-title">
-        胸部中间是否感到挤压？
+        刚买时，胸部中间是否感到挤压？
       </div>
     </div>
     <div class="furu-content">

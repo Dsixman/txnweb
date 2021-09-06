@@ -17,16 +17,16 @@
       <div v-else class="result-main" >
         根据甜小内 <br>
         “半码”个性化专属尺码表 <br>
-        您的尺码为：{{$store.state.txncup}}<br>
+        您的尺码为：<br>
+        <span style="font-size:1.8rem">{{$store.state.txncup}}</span><br>
         forget it!<br>
         无需占用您的大脑容量 <br>
         以后你的每次购买 <br>
         无需再测量 <br>
         无需再选择码数<br>
         甜小内会给您发送对应的码数 <br>
-        <br>
-        <img src="../assets/hei.png" alt="" width="200">
-
+        你尽情貌美如花 <br>
+        我做你私人管家
       </div>
 
       <div class="clear">
