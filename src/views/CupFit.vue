@@ -2,7 +2,7 @@
   <div class="">
     <div class="title-wrapper" >
       <div class="size-title">
-        是否感觉空杯或者压胸？
+        刚买时，是否感觉空杯或者压胸？
       </div>
     </div>
     <div class="cup-content">
