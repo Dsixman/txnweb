@@ -14,16 +14,6 @@
 
     </van-col>
     <van-col class="bottom-right">
-
-      <!-- <router-link :to="{ name: 'Personal', params: {} }">
-        <div class="bottom-font-icon">
-            <van-icon name="wap-home"></van-icon>
-        </div>
-        <div class="bottom-title">
-            <span>我的</span>
-        </div>
-
-      </router-link> -->
       <button type="button" name="button" @click="filter">
         <div class="bottom-font-icon">
           <van-icon name="manager"></van-icon>
