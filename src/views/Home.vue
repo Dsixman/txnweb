@@ -34,7 +34,7 @@
 
           </div>
           <div class="beian">
-            <p style="padding:0px;margin:0px;padding-top:10px;"><a href="https://www.tianxiaonei.com" style="color:#939393;font-weight: normal;font-size:1rem;">东莞市莞欣服饰有限公司</a></p>
+            <p style="padding:0px;margin:0px;padding-top:10px;"><a href="https://www.tianxiaonei.com" style="color:#939393;font-weight: normal;font-size:1rem;">东莞市莞欣服装有限公司</a></p>
             <div class="" style="box-size:border-box;text-decoration:none;">
               <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44190002005613" style="display:inline-block;text-decoration:none;background:white;width:300px;font-size:1rem;margin:0 auto;text-align:center;color:#939393;">粤公网安备 44190002005613号</a>
             </div>

@@ -2,7 +2,7 @@
   <div class="">
     <div class="title-wrapper" >
       <div class="size-title">
-        请先测量您下胸围的数据
+        请先测量你下胸围的数据
       </div>
       <div class="clear">
       </div>

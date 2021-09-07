@@ -2,7 +2,7 @@
   <div class="wrapper" v-if="isAgree">
     <div class="title-wrapper" >
       <div class="size-title">
-        请使用手机短信验证登录
+        请使用<span style="color:red;font-weight:bold">收货</span>手机短信验证登录
       </div>
     </div>
     <div class="">
@@ -52,7 +52,7 @@
         <van-button @click="login" class="login-btn">登录</van-button>
       </div>
       <p style="font-size:0.95rem;font-weight:bold;padding:2px;margin:0px;">0烦恼</p>
-      <div class="regist-tips">（“私人”管家式服务：一次测量即可，以后在各大平台，甜小内内衣闭着眼睛买，无需再选择码数，我们会根据你的电话号码，智能地给你发送对应的码数，就是这么的神奇！）</div>
+      <div class="regist-tips">（送甜小内内衣小管家：一次测量即可，以后在各大平台购买甜小内内衣，无需再选择码数，小管家会根据你的<span style="color:red;font-weight:bold">收货号码</span>，智能地给你发送适合你的对应的码数，享受女王级别的服务）</div>
     </div>
   </div>
 </template>

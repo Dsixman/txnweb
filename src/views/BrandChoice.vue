@@ -4,7 +4,7 @@
 
         <div class="title-wrapper" >
           <div class="size-title">
-            宝，您经常穿什么品牌呢?
+            宝，你经常穿什么品牌呢?
             <div class="" style="font-size:0.7rem">
               (文胸品牌千千万,甜小内是我最爱)
             </div>
@@ -18,10 +18,24 @@
             <van-button @click="savebrand($event)">甜小内</van-button>
           </van-col>
         </div>
-
         <div class="brand-title" >
           <van-col span="24" class="brand-title-items">
-            <van-button @click="savebrand($event)">曼尼芬</van-button>
+            <van-button @click="savebrand($event)">La Perla</van-button>
+          </van-col>
+        </div>
+        <div class="brand-title" >
+          <van-col span="24" class="brand-title-items">
+            <van-button @click="savebrand($event)">CK</van-button>
+          </van-col>
+        </div>
+        <div class="brand-title">
+          <van-col span="24" class="brand-title-items" >
+            <van-button @click="savebrand($event)">华歌尔</van-button>
+          </van-col>
+        </div>
+        <div class="brand-title" >
+          <van-col span="24" class="brand-title-items">
+            <van-button @click="savebrand($event)">曼妮芬</van-button>
           </van-col>
         </div>
         <div class="brand-title">
@@ -66,11 +80,7 @@
             <van-button @click="savebrand($event)">优衣库</van-button>
           </van-col>
         </div>
-        <div class="brand-title">
-          <van-col span="24" class="brand-title-items" >
-            <van-button @click="savebrand($event)">华歌尔</van-button>
-          </van-col>
-        </div>
+
         <div class="brand-title">
           <van-col span="24" class="brand-title-items" >
             <van-button @click="savebrand($event)">VICTORIA‵Ｓ SECRET</van-button>
