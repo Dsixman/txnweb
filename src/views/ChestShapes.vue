@@ -2,7 +2,7 @@
 <div class="shapes-wrapper">
   <div class="title-wrapper" >
     <div class="size-title">
-      请选择和您最接近的胸型哦
+      请选择和你最接近的胸型哦
     </div>
   </div>
 
