@@ -64,7 +64,12 @@ export default {
              this.$router.push('/err')
            }else{
              this.$store.dispatch("commitpersonaldata",data.data[0])
-             this.$store.dispatch("commitnickname",data.data[0].wx_user_name)
+             if (data.data[0].wx_user_name){
+                this.$store.dispatch("commitnickname",data.data[0].wx_user_name)
+             }else{
+                this.$store.dispatch("commitnickname",data.data[0].user_name)
+             }
+
              this.$store.dispatch("committxncup",data.data[0].user_txncup)
              this.$store.dispatch("commitusericon",data.data[0].user_icon)
            }

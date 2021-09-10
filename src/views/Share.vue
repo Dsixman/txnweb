@@ -10,25 +10,12 @@
       她肯定会很开心 <br>
       也许她也深受不合适文胸的困扰 <br>
       <br>
-<span style="font-size:1rem;font-weight:bold">甜小内上市倒计时</span><br>
-      <div class="clock">
-        <div class="time-box">
-          <div class="time-str">
-            {{day}}天
-          </div>
-          <div class="time-str">
-            {{hour}}时
-          </div>
-          <div class="time-str">
-            {{minute}}分
-          </div>
-          <div class="time-str">
-            {{second}}秒
-          </div>
-        </div>
-
+      <div class="" v-if="$store.state.client=='wxgzh'">
+          <a href="https://t.weimob.com/L1JaK"><img src="../assets/quan2.png" width="280"/></a>
       </div>
-
+      <div class="" v-else>
+        <img src="../assets/quan2.png" width="280" @click="toxcx"/>
+      </div>
     </div>
 
     <HomeBottom></HomeBottom>
@@ -71,8 +58,13 @@ export default {
         this.hour=''+h
         this.minute=''+m
         this.second=''+s
+    },
+    toxcx(){
+      console.log("123")
+      window.location.href="https://t.weimob.com/L1JaK"
     }
   },
+
 
 }
 </script>

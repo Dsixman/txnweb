@@ -4,7 +4,7 @@
       <div class="progress-wrap">
         <div class="progress">
         </div>
-        <p class="progress-title">根据所有内容，甜小内正在快马加鞭运算中。</p>
+        <p class="progress-title">根据所填数据，甜小内正在快马加鞭运算中。</p>
       </div>
     </div>
     <div class="title-wrapper" v-if="isShowPage">
