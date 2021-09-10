@@ -10,6 +10,10 @@
       她肯定会很开心 <br>
       也许她也深受不合适文胸的困扰 <br>
       <br>
+
+      <span style="font-size:1.2rem;color:red">
+      送50元优惠券<br/>
+      仅限今日 <br></span>
       <div class="" v-if="$store.state.client=='wxgzh'">
           <a href="https://t.weimob.com/L1JaK"><img src="../assets/quan2.png" width="280"/></a>
       </div>
@@ -77,7 +81,7 @@ export default {
   box-sizing: border-box;
 }
 .content{
-  margin-top:100px;
+  margin-top:35px;
   line-height:2rem;
   font-size:0.9rem;
   text-align: center;
